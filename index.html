@@ -105,6 +105,7 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .rates input{position:absolute;opacity:0;width:1px;height:1px}
 .rates label{display:inline-block;margin:0;padding:.6rem 1.1rem;border-radius:999px;border:2px solid var(--ink);font-weight:650;cursor:pointer;font-size:1rem}
 .rates input:checked + label{background:var(--ink);color:var(--butter)}
+.rates.cur label{padding:.4rem .8rem;font-size:.9rem}
 .rates input:focus-visible + label{outline:3px solid var(--butter);outline-offset:2px}
 .calc-out{background:var(--blue);color:#fff;padding:2rem 2.2rem;display:flex;flex-direction:column;justify-content:center}
 .calc-out .lbl{color:#cfd4ff;font-size:1rem}
@@ -287,6 +288,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <div class="calc">
       <div class="calc-in">
         <div class="field">
+          <fieldset>
+            <legend>Currency</legend>
+            <div class="rates cur">
+              <input type="radio" name="cur" id="cUSD" value="USD" checked><label for="cUSD">$ USD</label>
+              <input type="radio" name="cur" id="cEUR" value="EUR"><label for="cEUR">€ EUR</label>
+              <input type="radio" name="cur" id="cGBP" value="GBP"><label for="cGBP">£ GBP</label>
+              <input type="radio" name="cur" id="cAUD" value="AUD"><label for="cAUD">A$ AUD</label>
+              <input type="radio" name="cur" id="cCAD" value="CAD"><label for="cCAD">C$ CAD</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="field">
           <div class="row"><label for="followersNum">Your followers</label>
             <input class="num" id="followersNum" type="text" inputmode="decimal" autocomplete="off" value="48,000" aria-describedby="followersErr"></div>
           <input type="range" id="followers" min="0" max="1000" step="1" value="500" aria-label="Followers slider">
@@ -295,9 +308,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </div>
         <div class="field">
           <div class="row"><label for="priceNum">Price of the product</label>
-            <span class="numwrap"><span aria-hidden="true">$</span><input class="num" id="priceNum" type="text" inputmode="decimal" autocomplete="off" value="19" aria-describedby="priceErr"></span></div>
+            <span class="numwrap"><span aria-hidden="true" id="curSym">$</span><input class="num" id="priceNum" type="text" inputmode="decimal" autocomplete="off" value="19" aria-describedby="priceErr"></span></div>
           <input type="range" id="price" min="5" max="99" step="1" value="19" aria-label="Price slider">
-          <div class="ends"><span>$5</span><span>$99</span></div>
+          <div class="ends"><span id="priceMin">$5</span><span id="priceMax">$99</span></div>
           <p class="err" id="priceErr" hidden>Type a price, like 19 or 14.99.</p>
         </div>
         <div class="field">
@@ -392,10 +405,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   var fS=$('followers'),pS=$('price'),fN=$('followersNum'),pN=$('priceNum'),rN=$('rateNum');
   var MIN=1000,MAX=3000000;
   var state={followers:48000,price:19,rate:0.5};
-  var usd=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+  var CUR={USD:'$',EUR:'€',GBP:'£',AUD:'A$',CAD:'C$'};
+  var cur='USD',usd;
+  function setCur(c){cur=c;
+    var sym=CUR[c];$('curSym').textContent=sym;$('priceMin').textContent=sym+'5';$('priceMax').textContent=sym+'99';
+    usd={format:function(x){return sym+num.format(Math.round(x));}};}
   var num=new Intl.NumberFormat('en-US');
   function parse(str){
-    var s=String(str).trim().toLowerCase().replace(/[\s,$%]/g,'');
+    var s=String(str).trim().toLowerCase().replace(/[\s,$%€£]/g,'').replace(/^(a|c)(?=\d)/,'');
     var mult=1;
     if(/k$/.test(s)){mult=1e3;s=s.slice(0,-1)}else if(/m$/.test(s)){mult=1e6;s=s.slice(0,-1)}
     if(!/^\d*\.?\d+$/.test(s))return NaN;
@@ -407,12 +424,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   function fill(el){el.style.setProperty('--fill',((el.value-el.min)/(el.max-el.min)*100)+'%');}
   function setErr(input,errId,bad){input.setAttribute('aria-invalid',bad?'true':'false');$(errId).hidden=!bad;}
   function trim(x){return String(Math.round(x*100)/100);}
+  var shown={b:0,g:0},from={b:0,g:0},to={b:0,g:0},t0=0,raf=0,DUR=650,DELAY=120;
+  var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var out=document.querySelector('.calc-out');
+  function paint(b,g){
+    $('buyers').textContent=num.format(Math.round(b));$('gross').textContent=usd.format(g);
+    $('share').textContent=usd.format(g*0.6);$('mine').textContent=usd.format(g*0.4);
+  }
+  function step(now){
+    var k=Math.max(0,Math.min(1,(now-t0-DELAY)/DUR)),e=1-Math.pow(1-k,3);
+    shown.b=from.b+(to.b-from.b)*e;shown.g=from.g+(to.g-from.g)*e;paint(shown.b,shown.g);
+    if(k<1){raf=requestAnimationFrame(step);}else{raf=0;out.setAttribute('aria-busy','false');}
+  }
   function render(){
     var b=Math.round(state.followers*state.rate/100),g=b*state.price;
-    $('buyers').textContent=num.format(b);$('gross').textContent=usd.format(g);
-    $('share').textContent=usd.format(g*0.6);$('mine').textContent=usd.format(g*0.4);
     fS.setAttribute('aria-valuetext',num.format(state.followers)+' followers');
     fill(fS);fill(pS);
+    if(calm||!t0&&!shown.g){shown={b:b,g:g};to={b:b,g:g};paint(b,g);t0=1;return;}
+    if(b===to.b&&g===to.g){paint(shown.b,shown.g);return;}
+    from={b:shown.b,g:shown.g};to={b:b,g:g};
+    out.setAttribute('aria-busy','true');
+    t0=performance.now();if(!raf)raf=requestAnimationFrame(step);
   }
   function syncChips(){document.querySelectorAll('input[name=rate]').forEach(function(r){r.checked=(+r.value===state.rate);});}
 
@@ -436,6 +468,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   [fN,pN,rN].forEach(function(el){el.addEventListener('keydown',function(e){if(e.key==='Enter')el.blur();});
     ['input','blur'].forEach(function(ev){el.addEventListener(ev,function(){size(el);});});});
   var _render=render;render=function(){_render();[fN,pN,rN].forEach(size);};
+  document.querySelectorAll('input[name=cur]').forEach(function(r){r.addEventListener('change',function(){setCur(r.value);render();});});
+  (function(){var l=(navigator.language||'en-US').toLowerCase(),c='USD';
+    if(/^en-gb/.test(l))c='GBP';else if(/^en-au/.test(l))c='AUD';else if(/^(en|fr)-ca/.test(l))c='CAD';
+    else if(/^(fi|de|fr|es|it|nl|pt|el|et|lv|lt|sk|sl|ga|mt)(-|$)/.test(l)||/^en-ie/.test(l))c='EUR';
+    var el=document.getElementById('c'+c);if(el)el.checked=true;setCur(c);})();
   fS.value=sliderFromFollowers(state.followers);
   render();
 })();
