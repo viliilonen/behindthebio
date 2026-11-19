@@ -690,7 +690,12 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     mobs.forEach(function(el){ el.style.opacity=(1-z).toFixed(3); });
     var sc2=1+(S-1)*z, c=pan*.25*W*z, closed=(1-o)*-.25*W;
     bk.style.transform='translateX('+(closed-c*sc2).toFixed(1)+'px) scale('+sc2.toFixed(4)+')';
-    var clipX=z*Math.max(0,(sw-W*.5*sc2)/2-2); stage.style.clipPath=clipX>0.5?'inset(-60px '+clipX.toFixed(1)+'px)':'';
+    var wl=-sw/2, wr=sw/2, hw=.25*W*sc2;
+    if(z>0){ var pl, pr;
+      if(pan<=-1){ var cx=-.25*W*z; pl=(-.5*W-cx)*sc2; pr=(0-cx)*sc2; } else { pl=-hw; pr=hw; }
+      wl=-sw/2+(pl-(-sw/2))*z; wr=sw/2+(pr-sw/2)*z; }
+    var il=Math.max(0,sw/2+wl-2), ir=Math.max(0,sw/2-wr-2);
+    stage.style.clipPath=(il>0.5||ir>0.5)?'inset(-60px '+ir.toFixed(1)+'px -60px '+il.toFixed(1)+'px)':'';
     var st=o<.5?0:(z<.5?1:(pan<0?1:(f<.5?2:3)));
     if(st!==last){ last=st; var d=NOTES[st];
       if(cap) cap.textContent=d[0]+'. '+d[1];
