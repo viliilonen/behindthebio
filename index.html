@@ -156,7 +156,9 @@ h2{font-weight:760;font-stretch:86%;font-size:clamp(2rem,3.6vw,2.9rem);line-heig
 .deal ul{list-style:none;display:grid;gap:.7rem}
 .deal li{padding-left:1.6rem;position:relative}
 .deal li::before{content:"";position:absolute;left:0;top:.55em;width:.6rem;height:.6rem;border-radius:50%;background:var(--blue)}
-.deal > div:first-child li::before{background:var(--butter);box-shadow:0 0 0 1.5px var(--ink)}
+.deal > div.you li::before{background:var(--butter);box-shadow:0 0 0 1.5px var(--ink)}
+.roles{margin-top:3.2rem;background:#fff}
+.roles .time{margin-top:1.2rem;font-size:.92rem;color:var(--slate)}
 .shares{display:flex;margin-top:2rem;border-radius:999px;overflow:hidden;font-weight:700;border:2px solid var(--ink)}
 .shares span{padding:.9rem 1.2rem}
 .shares span:first-child{flex:60}.shares span:last-child{flex:40}
@@ -296,9 +298,9 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   <div class="wrap">
     <a class="logo" href="#top"><svg class="mark" viewBox="22 38 76 44" aria-hidden="true"><rect x="36" y="38" width="62" height="26" rx="13" fill="var(--butter)"/><rect x="22" y="56" width="62" height="26" rx="13" fill="#fff"/></svg>Behind the Bio</a>
     <nav aria-label="Main">
+      <a href="#how">How it works</a>
       <a href="#calculator">Calculator</a>
       <a href="#examples">Examples</a>
-      <a href="#how">How it works</a>
       <a href="#deal">The deal</a>
       <a href="#faq">Questions</a>
     </nav>
@@ -352,6 +354,40 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
         </div>
       </div>
       <p class="bio-note">The yellow parts are what I build for you: the ebook and the link to sell it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>From your comments to a finished product </h2>
+    <p class="intro">You don't write, design or set up anything. You check that it sounds like you, then you post about it.</p>
+    <ol class="steps">
+      <li><h3>We study your account</h3><p>Which posts carry it, what people ask in your comments, and what you'd never want your name on.</p></li>
+      <li><h3>We build the product</h3><p>A guide, ebook or planner in your voice and your look, using your recipes, methods or tips.</p></li>
+      <li><h3>You approve it</h3><p>You read it, fix anything that doesn't sound like you, and send the photos you want in it.</p></li>
+      <li><h3>You post, it sells</h3><p>It goes live in your link in bio. We handle the store, the files and buyer emails.</p></li>
+    </ol>
+    <div class="deal roles">
+      <div>
+        <h3>The studio does</h3>
+        <ul>
+          <li>Reads your comments, saves and captions to find what to make</li>
+          <li>Writes, edits and designs it in your voice and your look</li>
+          <li>Sets up the store page, checkout and file delivery</li>
+          <li>Answers buyers and updates the product when you add new content</li>
+        </ul>
+      </div>
+      <div class="you">
+        <h3>You do</h3>
+        <ul>
+          <li>Answer a few questions by email</li>
+          <li>Read the draft and approve the content and the price</li>
+          <li>Send your photos, or stills from your videos</li>
+          <li>Post about it a few times around launch</li>
+        </ul>
+        <p class="time">About two to three hours in total. You own the product and your name on it.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -451,19 +487,6 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   </div>
 </section>
 
-<section id="how">
-  <div class="wrap">
-    <h2>From your comments to a finished product </h2>
-    <p class="intro">You don't write, design or set up anything. You check that it sounds like you, then you post about it.</p>
-    <ol class="steps">
-      <li><h3>We study your account</h3><p>Which posts carry it, what people ask in your comments, and what you'd never want your name on.</p></li>
-      <li><h3>We build the product</h3><p>A guide, ebook or planner in your voice and your look, using your recipes, methods or tips.</p></li>
-      <li><h3>You approve it</h3><p>You read it, fix anything that doesn't sound like you, and send the photos you want in it.</p></li>
-      <li><h3>You post, it sells</h3><p>It goes live in your link in bio. We handle the store, the files and buyer emails.</p></li>
-    </ol>
-  </div>
-</section>
-
 <section class="fit audience" id="audience">
   <div class="wrap">
     <div>
@@ -485,27 +508,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <section class="split" id="deal">
   <div class="wrap">
     <h2>No upfront cost. We both earn when it sells.</h2>
-    <div class="deal">
-      <div>
-        <h3>You</h3>
-        <ul>
-          <li>Approve the content and the price</li>
-          <li>Share your photos, or stills from your videos</li>
-          <li>Post about it a few times around launch</li>
-          <li>Own the product and your name on it</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Me</h3>
-        <ul>
-          <li>Writing, editing and design</li>
-          <li>The store page and checkout setup</li>
-          <li>Delivering files and answering buyers</li>
-          <li>Updates when you add new content</li>
-        </ul>
-      </div>
-    </div>
-    <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to me"><span>60% to you</span><span>40% to me</span></div>
+    <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to the studio"><span>60% to you</span><span>40% to us</span></div>
     <p class="fine">Split of net sales after the store platform's fees, paid out monthly. We put it in a short written agreement before anything goes live.</p>
   </div>
 </section>
