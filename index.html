@@ -278,14 +278,15 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .example{padding-bottom:3rem;color:var(--paper)}
 .example h2{color:var(--paper)}
 .example .intro,.example .tag{color:#c3c8da}
-.example .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:start}
+.example .wrap{display:grid;grid-template-columns:.75fr 1.25fr;gap:3rem;align-items:start}
 .ex-text{position:sticky;top:18vh;align-self:start}
 .example .contents{margin-top:1.6rem;border-top-color:rgba(243,241,234,.2)}
 .example .contents li{border-bottom-color:rgba(243,241,234,.2)}
 .example .contents li span:last-child{color:#a9afc6}
 .ex-scroll{height:240vh;position:relative}
-.ex-stage{position:sticky;top:10vh;height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem}
-.book3d{--o:0;--f:0;position:relative;width:min(560px,100%);aspect-ratio:4/3;perspective:2000px;transform:translateX(calc((1 - var(--o)) * -25%));transition:transform .1s linear}
+.ex-stage{position:sticky;top:7vh;height:86vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;isolation:isolate}
+.ex-stage::before{content:"";position:absolute;left:50%;top:50%;width:120%;height:80%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(243,241,234,.13),rgba(243,241,234,0));z-index:-1;pointer-events:none}
+.book3d{--o:0;--f:0;position:relative;width:min(720px,100%,calc(52vh * 4 / 3 * 1.0));aspect-ratio:4/3;perspective:2000px;transform:translateX(calc((1 - var(--o)) * -25%));transition:transform .1s linear}
 .book3d .pg,.book3d .leaf{position:absolute;top:0;left:50%;width:50%;height:100%}
 .book3d .pg{border-radius:0 4px 4px 0;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
 .book3d img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
@@ -302,13 +303,25 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .toc-page ol{list-style:none;display:grid;gap:.5rem;font-size:clamp(.72rem,1.3vw,.9rem)}
 .toc-page li{display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px dotted var(--line);padding-bottom:.35rem}
 .toc-page li b{font-family:var(--display);font-weight:400}
-.ex-cap{font-size:.85rem;color:#a9afc6;letter-spacing:.06em;min-height:1.2em}
+.ex-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ex-note{align-self:center;width:min(30rem,100%);display:grid;gap:.25rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(243,241,234,.07);border:1px solid rgba(243,241,234,.16);transition:opacity .3s,transform .3s}
+.ex-note b{font-family:var(--display);font-weight:400;font-size:1.25rem;color:var(--paper)}
+.ex-note span{font-size:.95rem;color:#c3c8da}
+.ex-note.swap{opacity:0;transform:translateY(6px)}
+.ex-steps{list-style:none;display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center;counter-reset:pg}
+.ex-steps li{counter-increment:pg;display:flex;align-items:center;gap:.45rem;font-size:.82rem;font-weight:600;color:#a9afc6;padding:.35rem .75rem;border-radius:999px;border:1px solid rgba(243,241,234,.16);transition:background .3s,color .3s,border-color .3s}
+.ex-steps li::before{content:counter(pg);font-family:var(--display);font-weight:400;font-size:.95rem}
+.ex-steps li.on{background:var(--butter);border-color:var(--butter);color:var(--ink)}
+.ex-steps li.done{color:var(--paper)}
 @media (max-width:860px){
   .example .wrap{grid-template-columns:1fr;gap:1.5rem}
   .ex-text{position:static}
   .ex-scroll{height:200vh}
   .ex-stage{top:8vh;height:76vh}
   .book3d{width:86%}
+  .ex-steps{flex-wrap:nowrap;gap:.3rem}
+  .ex-steps li{font-size:.72rem;padding:.3rem .5rem;gap:.3rem}
+  .ex-note{padding:.75rem .9rem}
 }
 @media (prefers-reduced-motion:reduce){
   .ex-scroll{height:auto}
@@ -551,6 +564,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     </div>
     <div class="ex-scroll">
       <div class="ex-stage">
+        <div class="ex-note"><b>Your cover</b><span>Your photo, your title and your name on the front.</span></div>
         <div class="book3d" role="img" aria-label="The swirl roll book opening: cover, contents, a recipe page and a bake day planner">
           <div class="pg base"><img src="img/sample-planner.jpg" alt="" width="692" height="1037"></div>
           <div class="leaf l2">
@@ -562,6 +576,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
             <div class="face back toc-page"><p class="np-k">Contents</p><ol><li><span>The base dough</span><b>4</b></li><li><span>Twelve swirls</span><b>8</b></li><li><span>When it goes wrong</span><b>34</b></li><li><span>Bake day planner</span><b>40</b></li></ol><p class="np-s">The swirl roll book · sample</p></div>
           </div>
         </div>
+        <ol class="ex-steps" aria-hidden="true"><li class="on">Cover</li><li>Contents</li><li>Recipe</li><li>Planner</li></ol>
         <p class="ex-cap" aria-live="polite">The cover</p>
       </div>
     </div>
@@ -641,14 +656,18 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ if(cap) cap.textContent='Contents and a recipe page'; return; }
   var clamp=function(v){return v<0?0:v>1?1:v};
   var ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2};
-  var last='';
+  var last=-1, nt=null, note=document.querySelector('.ex-note'), steps=[].slice.call(document.querySelectorAll('.ex-steps li'));
+  var NOTES=[['Your cover','Your photo, your title and your name on the front.'],['Contents','Every chapter comes from what your followers ask about most.'],['A recipe page','Each recipe links back to the video it came from, in grams and cups.'],['Printables','Planners and checklists your followers print out and keep using.']];
   function upd(){
     var r=sc.getBoundingClientRect(), total=r.height-innerHeight*.8, p=clamp(-r.top/Math.max(total,1));
     var o=ease(clamp((p-.05)/.35)), f=ease(clamp((p-.6)/.3));
     bk.style.setProperty('--o',o.toFixed(4)); bk.style.setProperty('--f',f.toFixed(4));
     bk.classList.toggle('f2',f>.5);
-    var t=o<.5?'The cover':(f<.5?'Contents and a recipe page':'A printable planner for bake day');
-    if(cap&&t!==last){cap.textContent=t;last=t;}
+    var st=o<.5?0:(o<.98?1:(f<.5?2:3));
+    if(st!==last){ last=st; var d=NOTES[st];
+      if(cap) cap.textContent=d[0]+'. '+d[1];
+      steps.forEach(function(li,k){li.classList.toggle('on',k===st);li.classList.toggle('done',k<st);});
+      if(note){ note.classList.add('swap'); clearTimeout(nt); nt=setTimeout(function(){ note.querySelector('b').textContent=d[0]; note.querySelector('span').textContent=d[1]; note.classList.remove('swap'); },180); } }
   }
   addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd();
 })();
