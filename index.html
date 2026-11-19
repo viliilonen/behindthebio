@@ -318,9 +318,22 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .np-k{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--butter)}
 .np-q{font-family:var(--display);font-size:clamp(1rem,2vw,1.45rem);line-height:1.15}
 .np-s{margin-top:auto;font-size:.72rem;color:var(--slate)}
-.toc-page ol{list-style:none;display:grid;gap:.5rem;font-size:clamp(.72rem,1.3vw,.9rem)}
-.toc-page li{display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px dotted var(--line);padding-bottom:.35rem}
+.toc-page{container-type:inline-size}
+.book3d .face.back.toc-page,.reader .toc-page{padding:8% 8% 7%;gap:0}
+.toc-page > * + *{margin-top:3cqw}
+.toc-page > .toc-feed{margin-top:auto}
+.toc-page .np-k{font-size:3.4cqw}
+.toc-hi{font-family:var(--display);font-size:5.2cqw;line-height:1.15;color:var(--ink)}
+.toc-page .np-s{font-size:3cqw}
+.toc-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;margin-top:auto}
+.toc-feed img{width:100%;height:auto!important;aspect-ratio:1;object-fit:cover;border-radius:1.2cqw;display:block}
+.toc-page ol{list-style:none;display:grid;gap:1.6cqw;font-size:3.7cqw}
+.toc-page li{display:flex;justify-content:space-between;gap:2cqw;border-bottom:1px dotted var(--line);padding-bottom:1.3cqw}
 .toc-page li b{font-family:var(--display);font-weight:400}
+.reader{position:absolute;left:0;top:0;transform-origin:0 0;perspective:2400px;pointer-events:none;opacity:0;z-index:2}
+.reader .rp{position:absolute;inset:0;transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:4px;overflow:hidden;background:#fbfaf6;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.reader .rp img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+.reader .toc-page{color:var(--ink);display:flex;flex-direction:column}
 .ex-cap{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .ex-note{width:min(30rem,100%);display:grid;gap:.25rem;padding:.9rem 1.1rem;border-radius:12px;background:rgba(243,241,234,.07);border:1px solid rgba(243,241,234,.16);transition:opacity .3s,transform .3s}
 .ex-note b{font-family:var(--display);font-weight:400;font-size:1.25rem;color:var(--paper)}
@@ -594,7 +607,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
           </div>
           <div class="leaf l1">
             <div class="face front"><img src="img/sample-cover.jpg" alt="" width="692" height="1037"></div>
-            <div class="face back toc-page"><p class="np-k">Contents</p><ol><li><span>The base dough</span><b>4</b></li><li><span>Twelve swirls</span><b>8</b></li><li><span>When it goes wrong</span><b>34</b></li><li><span>Bake day planner</span><b>40</b></li></ol><p class="np-s">The swirl roll book · sample</p></div>
+            <div class="face back toc-page"><p class="np-k">Contents</p><p class="toc-hi">These are the bakes you asked about most, all in one place.</p><ol><li><span>The base dough</span><b>4</b></li><li><span>A schedule that fits a workday</span><b>6</b></li><li><span>Classic cinnamon swirls</span><b>10</b></li><li><span>Cardamom knots</span><b>14</b></li><li><span>Chocolate swirls</span><b>18</b></li><li><span>A Christmas batch</span><b>26</b></li><li><span>When it goes wrong</span><b>34</b></li><li><span>Bake day planner</span><b>40</b></li></ol><div class="toc-feed"><img src="img/feed/f1.jpg" alt=""><img src="img/feed/f2.jpg" alt=""><img src="img/feed/f3.jpg" alt=""></div><p class="np-s">The swirl roll book · sample</p></div>
           </div>
         </div>
         <ol class="ex-steps ex-m" aria-hidden="true"><li class="on">Cover</li><li>Contents</li><li>Recipe</li><li>Planner</li></ol>
@@ -679,21 +692,32 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   var ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2};
   var last=-1, nt=null, notes=[].slice.call(document.querySelectorAll('.ex-note')), lists=[].slice.call(document.querySelectorAll('.ex-steps')), stage=document.querySelector('.ex-stage'), mobs=[].slice.call(document.querySelectorAll('.ex-stage .ex-m'));
   var fToc=bk.querySelector('.l1 .face.back'), fRec=bk.querySelector('.l2 .face.front'), fBase=bk.querySelector('.pg.base'), raf=0;
+  var reader=document.createElement('div'); reader.className='reader'; reader.setAttribute('aria-hidden','true');
+  var mk=function(src,extra){ var n=src.cloneNode(true); n.className='rp'+(extra?' '+extra:''); n.style.opacity=''; reader.appendChild(n); return n; };
+  var rPlan=mk(fBase), rRec=mk(fRec), rToc=mk(fToc,'toc-page');
+  stage.appendChild(reader);
   var NOTES=[['Your cover','Your photo, your title and your name on the front.'],['Contents','Every chapter comes from what your followers ask about most.'],['A recipe page','Each recipe links back to the video it came from, in grams and cups.'],['Printables','Planners and checklists your followers print out and keep using.']];
   var seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
   function upd(){
     var r=sc.getBoundingClientRect(), total=r.height-innerHeight*.8, p=clamp(-r.top/Math.max(total,1));
-    var o=seg(p,.03,.18), rh=seg(p,.21,.27), a=seg(p,.24,.32), b=seg(p,.32,.42), cf=seg(p,.5,.555), rf=seg(p,.565,.62), pf=seg(p,.72,.765), pf2=seg(p,.775,.82), right=p>=.56;
+    var o=seg(p,.03,.17), rh=seg(p,.2,.26), a=seg(p,.23,.3), b=seg(p,.3,.4), t1=seg(p,.5,.6), t2=seg(p,.7,.8), showR=p>=.41;
     bk.style.setProperty('--o',o.toFixed(4)); bk.style.setProperty('--f','0');
     var W=bk.offsetWidth, H=W*.75, sw=stage.clientWidth, sh=stage.clientHeight;
-    var S=Math.max(1,Math.min(sw*.96/(W*.5), (sh-16)/H));
+    var S=Math.max(1,Math.min(sw*.92/(W*.5), sh*.86/H));
     mobs.forEach(function(el){ el.style.opacity=(1-a).toFixed(3); });
-    var k=1+(S-1)*b, cx=right?.25*W:-.25*W*a, closed=(1-o)*-.25*W;
+    var k=1+(S-1)*b, cx=-.25*W*a, closed=(1-o)*-.25*W;
     bk.style.transform='translateX('+(closed-cx*k).toFixed(1)+'px) scale('+k.toFixed(4)+')';
-    fToc.style.opacity=(1-cf).toFixed(3);
-    fRec.style.opacity=(right?rf*(1-pf):1-rh).toFixed(3);
-    fBase.style.opacity=(right?pf2:1-rh).toFixed(3);
-    var st=o<.5?0:(!right?1:(pf2<.5?2:3));
+    fRec.style.opacity=fBase.style.opacity=(1-rh).toFixed(3);
+    bk.style.opacity=showR?'0':'1';
+    reader.style.opacity=showR?'1':'0';
+    if(showR){
+      var pw=W*.5, ph=H, cy=bk.offsetTop+H/2;
+      reader.style.width=pw+'px'; reader.style.height=ph+'px';
+      reader.style.transform='translate('+(sw/2-pw*S/2).toFixed(1)+'px,'+(cy-ph*S/2).toFixed(1)+'px) scale('+S.toFixed(4)+')';
+      var turn=function(el,t){ el.style.transform='rotateY('+(-100*t).toFixed(2)+'deg)'; el.style.opacity=(1-clamp((t-.5)/.4)).toFixed(3); };
+      turn(rToc,t1); turn(rRec,t2);
+    }
+    var st=o<.5?0:(!showR||t1<.5?1:(t2<.5?2:3));
     if(st!==last){ last=st; var d=NOTES[st];
       if(cap) cap.textContent=d[0]+'. '+d[1];
       lists.forEach(function(ol){[].slice.call(ol.children).forEach(function(li,k){li.classList.toggle('on',k===st);li.classList.toggle('done',k<st);});});
