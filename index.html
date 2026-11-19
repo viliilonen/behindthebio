@@ -62,6 +62,54 @@ a{color:inherit}
 .btn:hover{transform:translateY(-2px)}
 .ghost{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
 
+/* chapters, surfaces, paper grain, torn edges */
+.chapter{display:flex;align-items:baseline;gap:.6rem;margin-bottom:.9rem;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+.chapter span{font-family:var(--italic);font-style:italic;font-weight:400;font-size:1.35rem;letter-spacing:0;text-transform:none;color:var(--butter)}
+main > section:not(.hero){position:relative;--sec:var(--paper);background:var(--sec)}
+main > section#calculator,main > section.split{--sec:#e6e1d3}
+main > section.audience,main > section.faq{--sec:var(--sheet)}
+main > section.example,main > section.contact{--sec:var(--blue)}
+main > section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-13px;height:14px;background:var(--sec);z-index:1;pointer-events:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 L0 9 L18 6 L31 10 L47 5 L66 8 L80 3 L97 9 L113 6 L131 10 L150 4 L166 8 L181 5 L200 10 L214 6 L232 9 L249 3 L266 8 L281 6 L300 10 L317 5 L333 9 L350 4 L368 8 L383 6 L401 10 L417 5 L434 9 L450 3 L468 8 L484 6 L500 10 L517 4 L533 8 L550 5 L567 9 L583 6 L600 8 L600 14 Z' fill='black'/%3E%3C/svg%3E") 0 0/600px 100% repeat-x;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 14' preserveAspectRatio='none'%3E%3Cpath d='M0 14 L0 9 L18 6 L31 10 L47 5 L66 8 L80 3 L97 9 L113 6 L131 10 L150 4 L166 8 L181 5 L200 10 L214 6 L232 9 L249 3 L266 8 L281 6 L300 10 L317 5 L333 9 L350 4 L368 8 L383 6 L401 10 L417 5 L434 9 L450 3 L468 8 L484 6 L500 10 L517 4 L533 8 L550 5 L567 9 L583 6 L600 8 L600 14 Z' fill='black'/%3E%3C/svg%3E") 0 0/600px 100% repeat-x}
+.split{border:0!important}.faq,.audience{border:0!important}
+.contact .chapter,.example .chapter{color:#a9afc6}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;mix-blend-mode:multiply;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.13 0 0 0 0 0.29 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* how it works: illustrations and the moving ribbon */
+.steps{position:relative}
+.steps-rib{position:absolute;left:0;top:-2px;width:16px;height:46px;background:var(--butter);clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%);transition:transform .7s cubic-bezier(.3,.9,.2,1);z-index:2;pointer-events:none}
+.vis{position:relative;height:104px;margin:0 0 1rem;border-radius:10px;background:var(--sheet);border:1px solid var(--line);overflow:hidden}
+.v1 .bub{position:absolute;left:12px;background:#fff;border:1px solid var(--line);border-radius:12px 12px 12px 3px;padding:.25rem .6rem;font-size:.78rem;font-weight:600;color:var(--ink);white-space:nowrap;box-shadow:0 4px 10px -6px rgba(22,34,74,.4)}
+.v1 .bub:nth-child(1){top:12px}.v1 .bub:nth-child(2){top:40px;left:42px}.v1 .bub:nth-child(3){top:68px;left:22px;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.vis .pg{position:absolute;left:50%;top:12px;width:96px;height:120px;margin-left:-48px;background:#fff;border:1px solid var(--line);border-radius:3px;padding:10px 10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 18px -12px rgba(22,34,74,.5)}
+.vis .pg i{display:block;height:4px;border-radius:2px;background:#c9cbd6;width:100%}
+.vis .pg i.t{height:7px;width:70%;background:var(--ink)}
+.vis .pg i.s{width:55%}
+.vis .pg b{display:block;height:28px;border-radius:2px;background:var(--linen);margin-top:2px}
+.v3 .stamp{position:absolute;right:14%;top:34px;border:2.5px solid var(--butter);color:var(--butter);font-family:var(--display);font-size:1.05rem;padding:.05rem .5rem;border-radius:5px;transform:rotate(-12deg);background:rgba(251,250,246,.85)}
+.v4 .note{position:absolute;left:10px;right:10px;top:14px;display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.4rem .6rem;box-shadow:0 6px 14px -8px rgba(22,34,74,.45)}
+.v4 .note.n2{top:56px}
+.v4 .dot{width:22px;height:22px;border-radius:6px;background:var(--ink);flex:none;position:relative}
+.v4 .dot::after{content:"";position:absolute;left:8px;top:6px;width:6px;height:10px;background:var(--butter);clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%)}
+.v4 .note span:last-child{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.v4 b{font-size:.78rem}.v4 small{font-size:.7rem;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (prefers-reduced-motion:no-preference){
+  .steps li.on .v1 .bub{animation:bubin .5s cubic-bezier(.2,.9,.3,1.2) both}
+  .steps li.on .v1 .bub:nth-child(2){animation-delay:.35s}.steps li.on .v1 .bub:nth-child(3){animation-delay:.7s}
+  .steps li.on .v2 .pg i,.steps li.on .v2 .pg b{animation:typeit .45s ease-out both;transform-origin:left}
+  .steps li.on .v2 .pg :nth-child(2){animation-delay:.25s}.steps li.on .v2 .pg :nth-child(3){animation-delay:.45s}.steps li.on .v2 .pg :nth-child(4){animation-delay:.65s}.steps li.on .v2 .pg :nth-child(5){animation-delay:.85s}
+  .steps li.on .v3 .stamp{animation:stampin .45s cubic-bezier(.3,1.6,.4,1) .35s both}
+  .steps li.on .v4 .note{animation:notein .5s cubic-bezier(.2,.9,.3,1.1) both}.steps li.on .v4 .note.n2{animation-delay:.6s}
+  @keyframes bubin{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
+  @keyframes typeit{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes stampin{from{opacity:0;transform:rotate(-12deg) scale(1.9)}to{opacity:1;transform:rotate(-12deg) scale(1)}}
+  @keyframes notein{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+}
+.steps li{transition:opacity .4s}
+.steps.live li:not(.on){opacity:.55}
+
 /* demo wall behind the hero */
 .hero{position:relative;isolation:isolate}
 .wall{position:absolute;top:-30%;bottom:-30%;left:30%;right:-12%;display:flex;gap:1.1rem;transform:rotate(-9deg);z-index:-2;pointer-events:none}
@@ -226,10 +274,47 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .own label{font-size:.95rem;color:var(--slate);font-weight:500}
 .err{margin-top:.5rem;font-size:.88rem;color:#b3261e}
 
-/* example */
-.example{padding-top:2rem}
-.example .wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
-.example .contents{margin-top:.4rem}
+/* example: the book that opens */
+.example{padding-bottom:3rem;color:var(--paper)}
+.example h2{color:var(--paper)}
+.example .intro,.example .tag{color:#c3c8da}
+.example .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:start}
+.ex-text{position:sticky;top:18vh;align-self:start}
+.example .contents{margin-top:1.6rem;border-top-color:rgba(243,241,234,.2)}
+.example .contents li{border-bottom-color:rgba(243,241,234,.2)}
+.example .contents li span:last-child{color:#a9afc6}
+.ex-scroll{height:240vh;position:relative}
+.ex-stage{position:sticky;top:10vh;height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem}
+.book3d{--o:0;--f:0;position:relative;width:min(560px,100%);aspect-ratio:4/3;perspective:2000px;transform:translateX(calc((1 - var(--o)) * -25%));transition:transform .1s linear}
+.book3d .pg,.book3d .leaf{position:absolute;top:0;left:50%;width:50%;height:100%}
+.book3d .pg{border-radius:0 4px 4px 0;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.book3d img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+.book3d .leaf{transform-origin:left center;transform-style:preserve-3d}
+.book3d .l1{transform:rotateY(calc(var(--o) * -180deg));z-index:3}
+.book3d .l2{transform:rotateY(calc(var(--f) * -180deg));z-index:2}
+.book3d.f2 .l2{z-index:4}
+.book3d .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;border-radius:0 4px 4px 0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.book3d .face.back{transform:rotateY(180deg);border-radius:4px 0 0 4px;background:#fbfaf6;color:var(--ink);padding:9% 9%;display:flex;flex-direction:column;gap:.8rem}
+.book3d .l1 .front{box-shadow:inset 6px 0 0 rgba(0,0,0,.25),0 30px 60px -30px rgba(0,0,0,.7)}
+.np-k{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--butter)}
+.np-q{font-family:var(--display);font-size:clamp(1rem,2vw,1.45rem);line-height:1.15}
+.np-s{margin-top:auto;font-size:.72rem;color:var(--slate)}
+.toc-page ol{list-style:none;display:grid;gap:.5rem;font-size:clamp(.72rem,1.3vw,.9rem)}
+.toc-page li{display:flex;justify-content:space-between;gap:.5rem;border-bottom:1px dotted var(--line);padding-bottom:.35rem}
+.toc-page li b{font-family:var(--display);font-weight:400}
+.ex-cap{font-size:.85rem;color:#a9afc6;letter-spacing:.06em;min-height:1.2em}
+@media (max-width:860px){
+  .example .wrap{grid-template-columns:1fr;gap:1.5rem}
+  .ex-text{position:static}
+  .ex-scroll{height:200vh}
+  .ex-stage{top:8vh;height:76vh}
+  .book3d{width:86%}
+}
+@media (prefers-reduced-motion:reduce){
+  .ex-scroll{height:auto}
+  .ex-stage{position:static;height:auto;padding:2rem 0}
+  .book3d{--o:1;transform:none}
+}
 .book{aspect-ratio:4/5;max-width:22rem;border-radius:.6rem 1.2rem 1.2rem .6rem;background:#2a2622;color:#f4ead8;padding:2.2rem 2rem;display:flex;flex-direction:column;justify-content:space-between;box-shadow:inset 10px 0 0 rgba(0,0,0,.25),0 28px 50px -28px rgba(0,0,0,.55);position:relative}
 .book .by{font-size:.85rem;color:#cdbfa8}
 .book .loaf{width:62%;aspect-ratio:1;margin:0 auto;border-radius:46% 46% 14px 14px;background:#d7953f;position:relative}
@@ -358,13 +443,14 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section id="how">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 1</span>How it works</p>
     <h2>From your comments to a finished product </h2>
     <p class="intro">You don't write, design or set up anything. You check that it sounds like you, then you post about it.</p>
-    <ol class="steps">
-      <li><span class="who us">We do</span><h3>We study your account</h3><p>We read your comments, saves and captions to find what your followers want, and what you'd never want your name on.</p></li>
-      <li><span class="who us">We do</span><h3>We build the product</h3><p>A guide, ebook or planner in your voice and your look. We write, edit and design it, and set up the store page and checkout.</p></li>
-      <li><span class="who you">You do</span><h3>You approve it</h3><p>Answer a few questions by email, read the draft, approve the content and the price, and send the photos you want in it.</p></li>
-      <li><span class="who you">You do</span><h3>You post, it sells</h3><p>Post about it a few times around launch. We deliver the files, answer buyers and update it when you add new content.</p></li>
+    <ol class="steps"><span class="steps-rib" aria-hidden="true"></span>
+      <li><span class="who us">We do</span><div class="vis v1" aria-hidden="true"><span class="bub">recipe please</span><span class="bub">in grams?</span><span class="bub">made it twice!</span></div><h3>We study your account</h3><p>We read your comments, saves and captions to find what your followers want, and what you'd never want your name on.</p></li>
+      <li><span class="who us">We do</span><div class="vis v2" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i></i><i class="s"></i><b></b></div></div><h3>We build the product</h3><p>A guide, ebook or planner in your voice and your look. We write, edit and design it, and set up the store page and checkout.</p></li>
+      <li><span class="who you">You do</span><div class="vis v3" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i class="s"></i><i></i></div><span class="stamp">Approved</span></div><h3>You approve it</h3><p>Answer a few questions by email, read the draft, approve the content and the price, and send the photos you want in it.</p></li>
+      <li><span class="who you">You do</span><div class="vis v4" aria-hidden="true"><div class="note"><span class="dot"></span><span><b>New order</b><small>The swirl roll book · $14</small></span></div><div class="note n2"><span class="dot"></span><span><b>New order</b><small>The swirl roll book · $14</small></span></div></div><h3>You post, it sells</h3><p>Post about it a few times around launch. We deliver the files, answer buyers and update it when you add new content.</p></li>
     </ol>
     <p class="time">About two to three hours of your time in total. You own the product and your name on it.</p>
   </div>
@@ -372,6 +458,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section id="calculator">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 2</span>The numbers</p>
     <h2>What could your book earn?</h2>
     <p class="intro">Move the sliders and pick how many followers might buy. Half a percent is a careful start.</p>
     <div class="calc">
@@ -433,6 +520,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section class="shelf" id="examples">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 3</span>Examples</p>
     <h2>Every book looks like the creator behind it</h2>
     <p class="intro">Six example covers for made-up accounts. Yours gets its own colours, your photos and your words.</p>
   </div>
@@ -447,13 +535,12 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   <div class="wrap"><p class="note">Scroll sideways to see them all. Photos are samples.</p></div>
 </section>
 
-<section class="example">
+<section class="example" id="book">
   <div class="wrap">
-    <div>
+    <div class="ex-text">
+      <p class="chapter"><span>Chapter 4</span>Inside a book</p>
       <h2>What a finished product looks like</h2>
-      <p class="intro">A 40 to 60 page PDF built around what your audience already watches. Here is what goes inside the swirl roll book above, made for a made-up baking account.</p>
-    </div>
-    <div>
+      <p class="intro">A 40 to 60 page PDF built around what your audience already watches. Scroll to open the swirl roll book, made for a made-up baking account.</p>
       <ul class="contents">
         <li><span>The base dough and a schedule that fits a workday</span><span>p. 4</span></li>
         <li><span>12 recipes, each linked to the video it came from</span><span>p. 8</span></li>
@@ -462,13 +549,30 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
       </ul>
       <span class="tag">Want to see a full sample made for your account? Send us your handle.</span>
     </div>
+    <div class="ex-scroll">
+      <div class="ex-stage">
+        <div class="book3d" role="img" aria-label="The swirl roll book opening: cover, contents, a recipe page and a bake day planner">
+          <div class="pg base"><img src="img/sample-planner.jpg" alt="" width="692" height="1037"></div>
+          <div class="leaf l2">
+            <div class="face front"><img src="img/sample-recipe.jpg" alt="" width="692" height="1037"></div>
+            <div class="face back note-page"><p class="np-k">kettle &amp; crumb</p><p class="np-q">“Every recipe from my captions, finally in one place.”</p><p class="np-s">Your words, your photos, your name on the cover.</p></div>
+          </div>
+          <div class="leaf l1">
+            <div class="face front"><img src="img/sample-cover.jpg" alt="" width="692" height="1037"></div>
+            <div class="face back toc-page"><p class="np-k">Contents</p><ol><li><span>The base dough</span><b>4</b></li><li><span>Twelve swirls</span><b>8</b></li><li><span>When it goes wrong</span><b>34</b></li><li><span>Bake day planner</span><b>40</b></li></ol><p class="np-s">The swirl roll book · sample</p></div>
+          </div>
+        </div>
+        <p class="ex-cap" aria-live="polite">The cover</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="fit audience" id="audience">
   <div class="wrap">
     <div>
-      <h2>What we do best: understanding your audience</h2>
+      <p class="chapter"><span>Chapter 5</span>Your audience</p>
+    <h2>What we do best: understanding your audience</h2>
       <p class="intro">Before anything gets written, we read what your followers already tell you. The product is built from that, so it answers the questions your audience keeps asking.</p>
     </div>
     <div>
@@ -485,6 +589,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section class="split" id="deal">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 6</span>The deal</p>
     <h2>No upfront cost. We both earn when it sells.</h2>
     <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to the studio"><span>60% to you</span><span>40% to us</span></div>
     <p class="fine">Split of net sales after the store platform's fees, paid out monthly. We put it in a short written agreement before anything goes live.</p>
@@ -493,6 +598,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section class="fit">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 7</span>Who it suits</p>
     <h2>This works best if</h2>
     <ul class="checks">
       <li>You have 10,000 followers or more, with no upper limit</li>
@@ -505,6 +611,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section class="faq" id="faq">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 8</span>Questions</p>
     <h2>Questions creators ask first</h2>
     <details><summary>Who owns the product?</summary><p>You do. It's sold under your name, on your page. We keep the right to show it in our portfolio only if you say yes.</p></details>
     <details><summary>What if it doesn't sell?</summary><p>Then neither of us earns, and you haven't paid anything. That's why we only work with accounts where we can see the demand in the comments first.</p></details>
@@ -516,6 +623,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <section class="contact" id="contact">
   <div class="wrap">
+    <p class="chapter"><span>Chapter 9</span>Your turn</p>
     <h2>Send us your handle and we'll tell you what we'd make</h2>
     <p>We'll look at your account and reply with one product idea and why it fits your audience. If it's not a fit, we'll say so.</p>
     <div class="cta-row"><a class="btn" href="mailto:hello@getbehindthebio.com?subject=Behind%20the%20Bio">Email us</a><button class="copy" type="button" data-email="hello@getbehindthebio.com"><span>hello@getbehindthebio.com</span><small>Copy</small></button></div>
@@ -528,6 +636,45 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <footer><div class="wrap"><span>&copy; 2026 Behind the Bio</span><span class="ft-links"><a href="mailto:hello@getbehindthebio.com">hello@getbehindthebio.com</a><span>Helsinki, Finland</span></span></div></footer>
 
 <script>
+(function(){
+  var sc=document.querySelector('.ex-scroll'), bk=document.querySelector('.book3d'), cap=document.querySelector('.ex-cap'); if(!sc||!bk) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ if(cap) cap.textContent='Contents and a recipe page'; return; }
+  var clamp=function(v){return v<0?0:v>1?1:v};
+  var ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2};
+  var last='';
+  function upd(){
+    var r=sc.getBoundingClientRect(), total=r.height-innerHeight*.8, p=clamp(-r.top/Math.max(total,1));
+    var o=ease(clamp((p-.05)/.35)), f=ease(clamp((p-.6)/.3));
+    bk.style.setProperty('--o',o.toFixed(4)); bk.style.setProperty('--f',f.toFixed(4));
+    bk.classList.toggle('f2',f>.5);
+    var t=o<.5?'The cover':(f<.5?'Contents and a recipe page':'A printable planner for bake day');
+    if(cap&&t!==last){cap.textContent=t;last=t;}
+  }
+  addEventListener('scroll',upd,{passive:true}); addEventListener('resize',upd); upd();
+})();
+(function(){
+  var ol=document.querySelector('.steps'); if(!ol) return;
+  var items=[].slice.call(ol.querySelectorAll('li')), rib=ol.querySelector('.steps-rib'), cur=-1, timer=null;
+  var still=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(i){ if(i===cur) return; cur=i;
+    items.forEach(function(li,k){ li.classList.remove('on'); if(k===i){ void li.offsetWidth; li.classList.add('on'); } });
+    var li=items[i]; if(rib&&li) rib.style.transform='translate('+(li.offsetLeft+44)+'px,'+li.offsetTop+'px)'; }
+  function rowLayout(){ return items.length>1 && Math.abs(items[0].offsetTop-items[1].offsetTop)<4; }
+  function tick(){ set((cur+1)%items.length); }
+  function onScroll(){
+    var r=ol.getBoundingClientRect(), vh=innerHeight;
+    var visible=r.top<vh*.85 && r.bottom>vh*.15;
+    ol.classList.toggle('live',visible);
+    if(!visible){ clearInterval(timer); timer=null; return; }
+    if(rowLayout()){ if(!timer && !still){ if(cur<0) set(0); timer=setInterval(tick,2600);} else if(still&&cur<0) set(0); return; }
+    clearInterval(timer); timer=null;
+    var mid=vh*.5, best=0, bd=1e9;
+    items.forEach(function(li,k){ var b=li.getBoundingClientRect(); var d=Math.abs((b.top+b.bottom)/2-mid); if(d<bd){bd=d;best=k;} });
+    set(best);
+  }
+  addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',function(){var c=cur;cur=-1;set(c<0?0:c);onScroll();});
+  onScroll();
+})();
 (function(){
   var b=document.querySelector('.float-cta'); if(!b||!('IntersectionObserver' in window)) return;
   var hero=document.querySelector('.hero'), contact=document.getElementById('contact'), past=false, near=false;
