@@ -187,6 +187,27 @@ input[type=range]::-moz-range-thumb{width:1.6rem;height:1.6rem;border-radius:50%
 .calc-out dd{font-weight:700;text-align:right}
 .calc-note{margin-top:1rem;font-size:.82rem;color:#b9bfff}
 @media (max-width:860px){.calc{grid-template-columns:1fr}.calc-in,.calc-out{padding:1.6rem 1.4rem}}
+@media (max-width:640px){
+  #calculator{padding:3.2rem 0}
+  .calc{margin-top:1.4rem;border-radius:1.1rem}
+  .calc-out{order:-1;padding:1rem 1.2rem .9rem}
+  .calc-out .lbl{font-size:.85rem}
+  .calc-out .big{font-size:2.7rem;margin:.1rem 0 .55rem}
+  .calc-out dl{grid-template-columns:repeat(3,auto);grid-auto-flow:column;grid-template-rows:auto auto;justify-content:space-between;gap:.05rem 1rem;padding-top:.55rem;font-size:.9rem}
+  .calc-out dt{font-size:.75rem}
+  .calc-out dd{text-align:left}
+  .calc-note{margin-top:.55rem;font-size:.72rem;line-height:1.35}
+  .calc-in{padding:1rem 1.2rem 1.2rem;gap:1rem}
+  .field .row{margin-bottom:.35rem}
+  .field .row label,.field legend{font-size:.95rem}
+  .field legend{margin-bottom:.4rem}
+  .num,.numwrap{font-size:1.35rem}
+  .ends,.own{display:none}
+  .rates{gap:.35rem;flex-wrap:nowrap}
+  .rates label{padding:.42rem .8rem;font-size:.9rem}
+  .rates.cur label{padding:.32rem .6rem;font-size:.8rem;white-space:nowrap}
+  .rates.cur .sym{display:none}
+}
 
 
 .field .row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.7rem}
@@ -338,18 +359,18 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <section id="calculator">
   <div class="wrap">
     <h2>What could your book earn?</h2>
-    <p class="intro">Drag the sliders or type your own numbers, then pick how many of your followers might buy. Half a percent is a careful place to start.</p>
+    <p class="intro">Move the sliders and pick how many followers might buy. Half a percent is a careful start.</p>
     <div class="calc">
       <div class="calc-in">
         <div class="field">
           <fieldset>
             <legend>Currency</legend>
             <div class="rates cur">
-              <input type="radio" name="cur" id="cUSD" value="USD" checked><label for="cUSD">$ USD</label>
-              <input type="radio" name="cur" id="cEUR" value="EUR"><label for="cEUR">€ EUR</label>
-              <input type="radio" name="cur" id="cGBP" value="GBP"><label for="cGBP">£ GBP</label>
-              <input type="radio" name="cur" id="cAUD" value="AUD"><label for="cAUD">A$ AUD</label>
-              <input type="radio" name="cur" id="cCAD" value="CAD"><label for="cCAD">C$ CAD</label>
+              <input type="radio" name="cur" id="cUSD" value="USD" checked><label for="cUSD"><span class="sym">$ </span>USD</label>
+              <input type="radio" name="cur" id="cEUR" value="EUR"><label for="cEUR"><span class="sym">€ </span>EUR</label>
+              <input type="radio" name="cur" id="cGBP" value="GBP"><label for="cGBP"><span class="sym">£ </span>GBP</label>
+              <input type="radio" name="cur" id="cAUD" value="AUD"><label for="cAUD"><span class="sym">A$ </span>AUD</label>
+              <input type="radio" name="cur" id="cCAD" value="CAD"><label for="cCAD"><span class="sym">C$ </span>CAD</label>
             </div>
           </fieldset>
         </div>
@@ -390,7 +411,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
           <dt>Total sales</dt><dd id="gross">$0</dd>
           <dt>My 40%</dt><dd id="mine">$0</dd>
         </dl>
-        <p class="calc-note">An estimate, not a promise. Platform fees come off before the split, and real sales depend on how much your audience wants the product.</p>
+        <p class="calc-note">An estimate, not a promise. Platform fees come off before the split.</p>
       </div>
     </div>
   </div>
