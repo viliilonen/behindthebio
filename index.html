@@ -682,21 +682,21 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   var seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
   function upd(){
     var r=sc.getBoundingClientRect(), total=r.height-innerHeight*.8, p=clamp(-r.top/Math.max(total,1));
-    var o=seg(p,.03,.2), z=seg(p,.28,.4), pan=-1+2*seg(p,.52,.62), f=seg(p,.72,.86);
+    var o=seg(p,.03,.2), a=seg(p,.26,.33), b=seg(p,.33,.43), pan=-1+2*seg(p,.53,.63), f=seg(p,.72,.86);
     bk.style.setProperty('--o',o.toFixed(4)); bk.style.setProperty('--f',f.toFixed(4));
     bk.classList.toggle('f2',f>.5);
     var W=bk.offsetWidth, H=W*.75, sw=stage.clientWidth, sh=stage.clientHeight;
-    var S=Math.max(1,Math.min(sw/(W*.5), (sh-16)/H));
-    mobs.forEach(function(el){ el.style.opacity=(1-z).toFixed(3); });
-    var sc2=1+(S-1)*z, c=pan*.25*W*z, closed=(1-o)*-.25*W;
-    bk.style.transform='translateX('+(closed-c*sc2).toFixed(1)+'px) scale('+sc2.toFixed(4)+')';
-    var wl=-sw/2, wr=sw/2, hw=.25*W*sc2;
-    if(z>0){ var pl, pr;
-      if(pan<=-1){ var cx=-.25*W*z; pl=(-.5*W-cx)*sc2; pr=(0-cx)*sc2; } else { pl=-hw; pr=hw; }
-      wl=-sw/2+(pl-(-sw/2))*z; wr=sw/2+(pr-sw/2)*z; }
-    var il=Math.max(0,sw/2+wl-2), ir=Math.max(0,sw/2-wr-2);
+    var S=Math.max(1,Math.min(sw*.96/(W*.5), (sh-16)/H));
+    mobs.forEach(function(el){ el.style.opacity=(1-a).toFixed(3); });
+    var k=1+(S-1)*b, cx=pan>-1?.25*W*pan:-.25*W*a, closed=(1-o)*-.25*W;
+    bk.style.transform='translateX('+(closed-cx*k).toFixed(1)+'px) scale('+k.toFixed(4)+')';
+    var wl=-sw/2, wr=sw/2;
+    if(a>0){ var pl, pr;
+      if(pan<=-1){ pl=(-.5*W-cx)*k; pr=(0-cx)*k; } else { pl=-.25*W*k; pr=.25*W*k; }
+      wl=-sw/2+(pl+sw/2)*a; wr=sw/2+(pr-sw/2)*a; }
+    var il=Math.max(0,sw/2+wl-1), ir=Math.max(0,sw/2-wr-1);
     stage.style.clipPath=(il>0.5||ir>0.5)?'inset(-60px '+ir.toFixed(1)+'px -60px '+il.toFixed(1)+'px)':'';
-    var st=o<.5?0:(z<.5?1:(pan<0?1:(f<.5?2:3)));
+    var st=o<.5?0:(b<.5?1:(pan<0?1:(f<.5?2:3)));
     if(st!==last){ last=st; var d=NOTES[st];
       if(cap) cap.textContent=d[0]+'. '+d[1];
       lists.forEach(function(ol){[].slice.call(ol.children).forEach(function(li,k){li.classList.toggle('on',k===st);li.classList.toggle('done',k<st);});});
