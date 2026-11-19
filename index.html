@@ -58,6 +58,28 @@ a{color:inherit}
 .btn:hover{transform:translateY(-2px)}
 .ghost{color:#fff;font-weight:600;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
 
+/* demo wall behind the hero */
+.hero{position:relative;isolation:isolate}
+.wall{position:absolute;top:-30%;bottom:-30%;left:30%;right:-12%;display:flex;gap:1.1rem;transform:rotate(-9deg);z-index:-2;pointer-events:none}
+.wall .col{flex:1;min-width:0;display:flex;flex-direction:column;gap:1.1rem;animation:wallup 70s linear infinite}
+.wall .col:nth-child(2n){animation-duration:85s;animation-direction:reverse;margin-top:-18%}
+.wall .col:nth-child(3n){animation-duration:95s}
+.wall img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:5px;box-shadow:0 14px 30px -10px rgba(8,16,90,.55);display:block}
+@keyframes wallup{to{transform:translateY(-50%)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(98deg,var(--blue) 0%,var(--blue) 34%,rgba(49,80,240,.86) 52%,rgba(49,80,240,.5) 78%,rgba(49,80,240,.3) 100%)}
+@media (prefers-reduced-motion:reduce){.wall .col{animation:none}}
+
+/* demo shelf */
+.shelf{padding-bottom:4.5rem}
+.shelf-row{--edge:max(1.5rem,calc((100% - 65rem) / 2));display:flex;gap:1.6rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--edge);padding:2.6rem var(--edge) 1.4rem;scrollbar-width:thin}
+.shelf-row figure{flex:0 0 clamp(170px,21vw,250px);scroll-snap-align:start;margin:0}
+.shelf-row img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:6px;display:block;box-shadow:0 18px 34px -16px rgba(23,24,31,.45);transition:transform .25s ease}
+.shelf-row figure:hover img{transform:translateY(-6px) rotate(-1.2deg)}
+.shelf-row figcaption{margin-top:.9rem;display:flex;flex-direction:column;gap:.1rem;font-size:.95rem}
+.shelf-row figcaption b{font-weight:700}
+.shelf-row figcaption span{color:var(--slate);font-size:.88rem}
+.shelf .note{margin-top:.4rem;color:var(--slate);font-size:.9rem}
+
 /* the bio */
 .bio{max-width:20.5rem;justify-self:end;width:100%;container-type:inline-size}
 .phone{box-sizing:content-box;aspect-ratio:393/852;background:#fff;color:#111;border-radius:2.4rem;border-radius:calc((100cqw - 12px) * 55 / 393 + 6px);padding:0;border:6px solid #11163f;box-shadow:0 34px 70px -30px rgba(10,15,80,.7);overflow:hidden;font-size:.82rem;line-height:1.35}
@@ -224,6 +246,8 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 @media (max-width:860px){
   .hero{padding:7rem 0 4.5rem}
+  .wall{left:-20%;right:-20%;top:-10%;opacity:.55}
+  .hero::before{background:linear-gradient(180deg,rgba(49,80,240,.9) 0%,rgba(49,80,240,.84) 55%,rgba(49,80,240,.7) 100%)}
   .hero .wrap,.example .wrap,.fit .wrap{grid-template-columns:1fr;gap:3rem}
   .bio{justify-self:start}
   .steps{grid-template-columns:1fr 1fr}
@@ -246,6 +270,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     <a class="logo" href="#top"><svg class="mark" viewBox="22 38 76 44" aria-hidden="true"><rect x="36" y="38" width="62" height="26" rx="13" fill="var(--butter)"/><rect x="22" y="56" width="62" height="26" rx="13" fill="#fff"/></svg>Behind the Bio</a>
     <nav aria-label="Main">
       <a href="#how">How it works</a>
+      <a href="#examples">Examples</a>
       <a href="#deal">The deal</a>
       <a href="#calculator">Calculator</a>
       <a href="#faq">Questions</a>
@@ -255,6 +280,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <main id="top">
 <section class="hero">
+  <div class="wall" aria-hidden="true"><div class="col"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"></div></div>
   <div class="wrap">
     <div>
       <h1>Your followers keep asking. Sell them the answer.</h1>
@@ -404,6 +430,22 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
       </div>
     </div>
   </div>
+</section>
+
+<section class="shelf" id="examples">
+  <div class="wrap">
+    <h2>Every book looks like the creator behind it</h2>
+    <p class="intro">Six example covers for made-up accounts. Yours gets its own colours, your photos and your words.</p>
+  </div>
+  <div class="shelf-row">
+    <figure><img src="img/demos/bowl.jpg" alt="Example cover: one bowl cookies" width="660" height="990" loading="lazy"><figcaption><b>one bowl cookies</b><span>Cookies and bars</span></figcaption></figure>
+    <figure><img src="img/demos/truffle.jpg" alt="Example cover: The Little Truffle Book" width="660" height="990" loading="lazy"><figcaption><b>The Little Truffle Book</b><span>No-bake holiday treats</span></figcaption></figure>
+    <figure><img src="img/sample-cover.jpg" alt="Example cover: The swirl roll book" width="660" height="990" loading="lazy"><figcaption><b>The swirl roll book</b><span>Cinnamon rolls</span></figcaption></figure>
+    <figure><img src="img/demos/world.jpg" alt="Example cover: Around the World at Home" width="660" height="990" loading="lazy"><figcaption><b>Around the World at Home</b><span>World cooking at home</span></figcaption></figure>
+    <figure><img src="img/demos/bread.jpg" alt="Example cover: Soft Bread Sundays" width="660" height="990" loading="lazy"><figcaption><b>Soft Bread Sundays</b><span>Easy soft bread</span></figcaption></figure>
+    <figure><img src="img/demos/brownie.jpg" alt="Example cover: Brownies &amp; Big Cookies" width="660" height="990" loading="lazy"><figcaption><b>Brownies &amp; Big Cookies</b><span>Brownies and cookies</span></figcaption></figure>
+  </div>
+  <div class="wrap"><p class="note">Scroll sideways to see them all. Photos are samples.</p></div>
 </section>
 
 <section class="example">
