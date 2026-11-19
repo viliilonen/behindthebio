@@ -88,6 +88,18 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .vis .pg i.t{height:7px;width:70%;background:var(--ink)}
 .vis .pg i.s{width:55%}
 .vis .pg b{display:block;height:28px;border-radius:2px;background:var(--linen);margin-top:2px}
+.v0 .mini{position:absolute;left:50%;top:12px;width:64px;height:92px;margin-left:-46px;background:var(--ink);border-radius:2px 4px 4px 2px;padding:10px 8px;display:flex;flex-direction:column;gap:5px;box-shadow:inset 4px 0 0 rgba(0,0,0,.3),0 8px 18px -10px rgba(22,34,74,.6)}
+.v0 .mini i{display:block;height:4px;border-radius:2px;background:var(--paper);width:80%}
+.v0 .mini i.t{height:6px;width:90%}.v0 .mini i.s{width:55%;opacity:.6}
+.v0 .mini b{margin-top:auto;height:30px;border-radius:2px;background:var(--linen);opacity:.8}
+.v0 .free{position:absolute;left:50%;top:30px;margin-left:8px;background:var(--butter);color:var(--ink);font-size:.7rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;transform:rotate(6deg);white-space:nowrap}
+.v5 .form{position:absolute;left:12px;right:12px;top:12px;display:grid;gap:7px}
+.v5 .form span{display:grid;gap:3px}
+.v5 .form i{display:block;height:3px;width:40%;border-radius:2px;background:#c9cbd6}
+.v5 .form em{display:block;height:12px;border-radius:3px;background:#fff;border:1px solid var(--line);position:relative;overflow:hidden}
+.v5 .form em::after{content:"";position:absolute;left:4px;top:4px;height:3px;width:60%;border-radius:2px;background:var(--ink)}
+.v5 .form em.half::after{width:32%}
+.v5 .mins{position:absolute;right:10px;bottom:8px;font-family:var(--display);font-size:.95rem;color:var(--ink);background:var(--butter);padding:.05rem .45rem;border-radius:4px}
 .v3 .stamp{position:absolute;right:14%;top:34px;border:2.5px solid var(--butter);color:var(--butter);font-family:var(--display);font-size:1.05rem;padding:.05rem .5rem;border-radius:5px;transform:rotate(-12deg);background:rgba(251,250,246,.85)}
 .v4 .note{position:absolute;left:10px;right:10px;top:14px;display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.4rem .6rem;box-shadow:0 6px 14px -8px rgba(22,34,74,.45)}
 .v4 .note.n2{top:56px}
@@ -100,6 +112,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   .steps li.on .v1 .bub:nth-child(2){animation-delay:.35s}.steps li.on .v1 .bub:nth-child(3){animation-delay:.7s}
   .steps li.on .v2 .pg i,.steps li.on .v2 .pg b{animation:typeit .45s ease-out both;transform-origin:left}
   .steps li.on .v2 .pg :nth-child(2){animation-delay:.25s}.steps li.on .v2 .pg :nth-child(3){animation-delay:.45s}.steps li.on .v2 .pg :nth-child(4){animation-delay:.65s}.steps li.on .v2 .pg :nth-child(5){animation-delay:.85s}
+  .steps li.on .v0 .mini{animation:bubin .5s cubic-bezier(.2,.9,.3,1.2) both}.steps li.on .v0 .free{animation:stampin2 .45s cubic-bezier(.3,1.6,.4,1) .4s both}
+  .steps li.on .v5 .form em::after{animation:typeit .5s ease-out both;transform-origin:left}.steps li.on .v5 .form span:nth-child(2) em::after{animation-delay:.35s}.steps li.on .v5 .form span:nth-child(3) em::after{animation-delay:.7s}
+  @keyframes stampin2{from{opacity:0;transform:rotate(6deg) scale(1.8)}to{opacity:1;transform:rotate(6deg) scale(1)}}
   .steps li.on .v3 .stamp{animation:stampin .45s cubic-bezier(.3,1.6,.4,1) .35s both}
   .steps li.on .v4 .note{animation:notein .5s cubic-bezier(.2,.9,.3,1.1) both}.steps li.on .v4 .note.n2{animation-delay:.6s}
   @keyframes bubin{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}
@@ -189,10 +204,11 @@ section{padding:6rem 0}
 h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem);line-height:1.05;letter-spacing:-.01em;max-width:20ch;text-wrap:balance}
 .intro{margin-top:1rem;max-width:var(--measure);color:var(--slate);font-size:1.15rem}
 
-.steps{list-style:none;margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;counter-reset:s}
+.steps{list-style:none;margin-top:3rem;display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;counter-reset:s}
 .steps li{counter-increment:s;border-top:2px solid var(--ink);padding-top:1.1rem;position:relative}
 .who{position:absolute;top:1.25rem;right:0;font-size:.72rem;font-weight:750;letter-spacing:.06em;text-transform:uppercase;padding:.28rem .62rem;border-radius:999px;line-height:1.2}
 .who.us{background:var(--blue);color:#fff}
+.who.both{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
 .who.you{background:var(--butter);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
 #how .time{margin-top:2rem;color:var(--slate);font-size:.98rem}
 .steps li::before{content:counter(s);font-family:var(--display);font-weight:400;font-size:2.6rem;line-height:1;color:var(--blue);display:block;margin-bottom:.8rem}
@@ -378,7 +394,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
   .hero::before{background:linear-gradient(180deg,rgba(22,34,74,.9) 0%,rgba(22,34,74,.84) 55%,rgba(22,34,74,.7) 100%)}
   .hero .wrap,.example .wrap,.fit .wrap{grid-template-columns:1fr;gap:3rem}
   .bio{justify-self:start}
-  .steps{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr 1fr}
   .deal{grid-template-columns:1fr}
   .deal > div + div{border-left:0;border-top:2px solid var(--ink)}
   .bar nav{display:none}
@@ -457,15 +473,16 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <section id="how">
   <div class="wrap">
     <p class="chapter"><span>Chapter 1</span>How it works</p>
-    <h2>From your comments to a finished product </h2>
+    <h2>From a free sample to a finished product</h2>
     <p class="intro">You don't write, design or set up anything. You check that it sounds like you, then you post about it.</p>
     <ol class="steps"><span class="steps-rib" aria-hidden="true"></span>
-      <li><span class="who us">We do</span><div class="vis v1" aria-hidden="true"><span class="bub">recipe please</span><span class="bub">in grams?</span><span class="bub">made it twice!</span></div><h3>We study your account</h3><p>We read your comments, saves and captions to find what your followers want, and what you'd never want your name on.</p></li>
-      <li><span class="who us">We do</span><div class="vis v2" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i></i><i class="s"></i><b></b></div></div><h3>We build the product</h3><p>A guide, ebook or planner in your voice and your look. We write, edit and design it, and set up the store page and checkout.</p></li>
-      <li><span class="who you">You do</span><div class="vis v3" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i class="s"></i><i></i></div><span class="stamp">Approved</span></div><h3>You approve it</h3><p>Answer a few questions by email, read the draft, approve the content and the price, and send the photos you want in it.</p></li>
-      <li><span class="who you">You do</span><div class="vis v4" aria-hidden="true"><div class="note"><span class="dot"></span><span><b>New order</b><small>The swirl roll book · $14</small></span></div><div class="note n2"><span class="dot"></span><span><b>New order</b><small>The swirl roll book · $14</small></span></div></div><h3>You post, it sells</h3><p>Post about it a few times around launch. We deliver the files, answer buyers and update it when you add new content.</p></li>
+      <li><span class="who us">We do</span><div class="vis v0" aria-hidden="true"><div class="mini"><i class="t"></i><i class="s"></i><b></b></div><span class="free">Free sample</span></div><h3>You get a free sample</h3><p>We read your account and make a few sample pages from your own content. No cost and no commitment.</p></li>
+      <li><span class="who you">You do</span><div class="vis v5" aria-hidden="true"><div class="form"><span><i></i><em></em></span><span><i></i><em></em></span><span><i></i><em class="half"></em></span></div><span class="mins">20 min</span></div><h3>A short form, about 20 minutes</h3><p>If you like the sample, you fill in a short online form about your recipes, your style and your price.</p></li>
+      <li><span class="who us">We do</span><div class="vis v2" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i></i><i class="s"></i><b></b></div></div><h3>We build the product</h3><p>We write, edit and design the full book in your voice and your look, based on your answers.</p></li>
+      <li><span class="who both">Together</span><div class="vis v3" aria-hidden="true"><div class="pg"><i class="t"></i><i></i><i class="s"></i><i></i></div><span class="stamp">Approved</span></div><h3>You approve, we publish</h3><p>You read it and ask for any changes. Then we put it live for you, or you add it to your own store if you already have one.</p></li>
+      <li><span class="who you">You do</span><div class="vis v1" aria-hidden="true"><span class="bub">where can I get it?</span><span class="bub">just bought it!</span><span class="bub">made the swirls already</span></div><h3>You tell your followers</h3><p>Post about it the way you normally would. We handle the files, the buyers and any updates.</p></li>
     </ol>
-    <p class="time">About two to three hours of your time in total. You own the product and your name on it.</p>
+    <p class="time">Your part: a 20-minute form, one read-through and a few posts. You own the product and your name on it.</p>
   </div>
 </section>
 
@@ -632,7 +649,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     <details><summary>What if it doesn't sell?</summary><p>Then neither of us earns, and you haven't paid anything. That's why we only work with accounts where we can see the demand in the comments first.</p></details>
     <details><summary>Where does it sell, and who handles taxes?</summary><p>On the link-in-bio store you already use, like Beacons or Stan, or on a store we set up for you. Platforms that act as the seller of record handle VAT and sales tax for each purchase.</p></details>
     <details><summary>Will it sound like me?</summary><p>We write from your captions, videos and comments, and you edit anything that feels off before it goes live. Nothing is published without your approval.</p></details>
-    <details><summary>How much of my time does it take?</summary><p>About two to three hours, all by email: you answer a few questions, read through the product once, and post about it a few times at launch. No calls needed.</p></details>
+    <details><summary>How much of my time does it take?</summary><p>About two to three hours in total: a 20-minute form, one read-through of the product, and a few posts about it at launch. No calls needed.</p></details>
   </div>
 </section>
 
