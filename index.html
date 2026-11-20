@@ -160,7 +160,10 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .ig-in{position:relative;transform-origin:50% 30%;will-change:transform}
 .ig-in{--dim:0}
 .ig-in > :not(.ig-bio),.ig-bio > :not(.ig-shop){opacity:calc(1 - var(--dim) * .75);filter:blur(calc(var(--dim) * 1.5px))}
-.scr-shop,.scr-done{transform:translateY(102%);z-index:2}
+.scr-done{transform:translateY(102%);z-index:3}
+.scr-shop{z-index:2;opacity:0}
+.sh-flash{position:absolute;inset:0;background:var(--butter);pointer-events:none;z-index:2}
+.sh-in{transform-origin:50% 40%}
 .sh-url{display:flex;align-items:center;justify-content:center;gap:.35rem;margin:0 .8rem .6rem;padding:.35rem .6rem;border-radius:999px;background:#f0f0f3;font-size:.72rem;color:#444}
 .sh-cover{margin:0 auto;width:52%;aspect-ratio:2/3;border-radius:3px;overflow:hidden;box-shadow:0 14px 26px -12px rgba(22,34,74,.55)}
 .sh-cover img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
@@ -182,7 +185,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .dn-ic{width:2rem;height:2rem;border-radius:8px;background:#16224a;flex:none;position:relative}
 .dn-ic::after{content:"";position:absolute;left:.75rem;top:.45rem;width:.5rem;height:.8rem;background:var(--butter);clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%)}
 .tap{position:absolute;left:0;top:0;width:2.2rem;height:2.2rem;margin:-1.1rem 0 0 -1.1rem;border-radius:50%;background:rgba(22,34,74,.28);border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 6px rgba(22,34,74,.12);z-index:6;opacity:0;pointer-events:none}
-.bio-note{min-height:2.6em;transition:opacity .25s}
+.bio-note{height:2.8em;transition:opacity .25s}
 .bio-note.swap{opacity:0}
 @media (min-width:861px){
   .hero{height:260vh;padding:0}
@@ -202,11 +205,6 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   .bio-stick{position:static!important}
 }
 
-.bio-stick{position:relative}
-.stamp60{position:absolute;z-index:8;left:-4.4rem;bottom:22%;width:8.8rem;height:8.8rem;transform:rotate(-10deg);transition:opacity .3s;filter:drop-shadow(0 10px 18px rgba(5,10,30,.45))}
-.stamp60 svg{width:100%;height:100%;display:block}
-.stamp60 b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:400;font-size:2.7rem;color:#16224a;letter-spacing:-.02em}
-@media (max-width:860px){.stamp60{left:-1.2rem;bottom:20%;width:7rem;height:7rem}.stamp60 b{font-size:2.1rem}}
 /* the bio */
 .bio{width:100%;container-type:inline-size}
 .phone{box-sizing:content-box;aspect-ratio:393/852;background:#fff;color:#111;border-radius:2.4rem;border-radius:calc((100cqw - 12px) * 55 / 393 + 6px);padding:0;border:6px solid #11163f;box-shadow:0 34px 70px -30px rgba(10,15,80,.7);overflow:hidden;font-size:.82rem;line-height:1.35}
@@ -516,7 +514,6 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     </div>
 
     <div class="bio-scroll"><div class="bio-stick">
-    <div class="stamp60" aria-label="You keep 60 percent of every sale"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="st60" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="57" fill="#d99a1e"/><circle cx="60" cy="60" r="51" fill="none" stroke="#16224a" stroke-width="1.4"/><text font-family="Instrument Sans, sans-serif" font-size="9" font-weight="700" letter-spacing="2.2" fill="#16224a"><textPath href="#st60" startOffset="0">OF EVERY SALE IS YOURS · OF EVERY SALE IS YOURS ·</textPath></text></svg><b>60%</b></div>
     <div class="bio" aria-label="Example of a creator's profile with the ebook link added to the bio">
       <div class="phone">
         <div class="notch" aria-hidden="true"></div>
@@ -549,6 +546,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
         </div>
         </div></div>
         <div class="scr scr-shop" aria-hidden="true">
+          <div class="sh-in">
           <div class="sh-url"><svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><rect x="1" y="5" width="8" height="6.5" rx="1.5" fill="currentColor"/><path d="M3 5V3.6a2 2 0 014 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>kettleandcrumb.com/book</div>
           <div class="sh-cover"><img src="img/sample-cover.jpg" alt="" width="692" height="1037"></div>
           <div class="sh-body">
@@ -558,6 +556,8 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
             <div class="sh-row"><span class="sh-price">$14</span><span class="sh-buy">Buy now</span></div>
             <p>One soft dough, twelve swirls and a planner for bake day.</p>
           </div>
+          </div>
+          <span class="sh-flash"></span>
         </div>
         <div class="scr scr-done" aria-hidden="true">
           <span class="dn-check"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -761,7 +761,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 (function(){
   var hero=document.querySelector('.hero'), bs=document.querySelector('.bio-scroll'), phone=document.querySelector('.phone'); if(!hero||!bs||!phone) return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var stamp=document.querySelector('.stamp60'), igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
+  var flash=phone.querySelector('.sh-flash'), shopIn=phone.querySelector('.sh-in'), igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
   var desk=window.matchMedia('(min-width: 861px)');
   var clamp=function(v){return v<0?0:v>1?1:v}, ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}, seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
   var NOTES=['The highlighted parts are what we build for you: the ebook and the link to sell it.','Your followers tap the link in your bio.','They land on your own store page, under your name.','They pay in a few taps, and the book arrives in their inbox.'];
@@ -775,12 +775,14 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     // zoom into the link card
     var sw=igc.clientWidth, shh=igc.clientHeight, cx=card.offsetLeft+card.offsetWidth/2, cy=card.offsetTop+card.offsetHeight/2;
     var n=card; cx=0; cy=0; while(n&&n!==ig){ cx+=n.offsetLeft; cy+=n.offsetTop; n=n.offsetParent; } cx+=card.offsetWidth/2; cy+=card.offsetHeight/2;
-    var kmax=Math.min(1.6, sw*.96/card.offsetWidth), k=1+(kmax-1)*z;
-    ig.style.setProperty('--dim',z.toFixed(3)); if(stamp) stamp.style.opacity=(1-clamp(z*2.5)).toFixed(3);
+    var k=1+.06*z, cw=card.offsetWidth, ch=card.offsetHeight, cl=cx-cw/2, ct=cy-ch/2;
+    ig.style.setProperty('--dim',z.toFixed(3));
     ig.style.transformOrigin=cx+'px '+cy+'px';
-    ig.style.transform='translate('+((sw/2-cx)*z).toFixed(1)+'px,'+((shh*.45-cy)*z).toFixed(1)+'px) scale('+k.toFixed(3)+')';
+    ig.style.transform='scale('+k.toFixed(3)+')';
     cbtn.style.transform=(t1>.3&&t1<.75)?'scale(.9)':'';
-    shop.style.transform='translateY('+(102*(1-sh)).toFixed(2)+'%)';
+    var q=1-sh, ins=[ct*q, (sw-cl-cw)*q, (shh-ct-ch)*q, cl*q].map(function(v){return Math.max(0,v).toFixed(1)+'px'}).join(' ');
+    shop.style.opacity=sh>.001?'1':'0'; shop.style.clipPath='inset('+ins+' round '+(11*q+2).toFixed(1)+'px)';
+    flash.style.opacity=Math.max(0,1-sh*1.6).toFixed(3); shopIn.style.transform='scale('+(.92+.08*sh).toFixed(3)+')';
     buy.classList.toggle('press',t2>.3&&t2<.75);
     done.style.transform='translateY('+(102*(1-dn)).toFixed(2)+'%)';
     if(t1>0&&t1<1) showTap(rel(cbtn),t1); else if(t2>0&&t2<1) showTap(rel(buy),t2); else showTap(null,0);
