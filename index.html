@@ -279,7 +279,7 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem)
 .lg-rows > div{display:flex;align-items:baseline;gap:.6rem;padding:.55rem 0}
 .lg-rows dt{flex:1;display:flex;align-items:baseline;gap:.6rem;font-size:1.05rem;color:var(--ink);min-width:0}
 .lg-rows dt::after{content:"";flex:1;border-bottom:2px dotted var(--line);transform:translateY(-.3em);min-width:1.5rem}
-.lg-rows dd{font-family:var(--display);font-size:1.6rem;line-height:1;color:var(--ink)}
+.lg-rows dd{font-family:var(--display);font-size:1.6rem;line-height:1;color:var(--ink);white-space:nowrap}
 .lg-sub{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line);font-size:.98rem;color:var(--slate)}
 .lg-split{margin-top:.4rem}
 .lg-you dt{font-weight:700;font-size:1.2rem}
@@ -289,6 +289,7 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem)
 .lg-us dt small{order:3;flex-basis:100%;font-size:.88rem;color:var(--slate);margin-top:.2rem;line-height:1.4}
 .lg-foot{margin-top:1.4rem;font-size:.9rem;color:var(--slate)}
 @media (max-width:860px){.deal-grid{grid-template-columns:1fr;gap:2rem}.ledger{padding:2rem 1.4rem 1.6rem}.lg-mark{width:3rem;height:3rem;top:1.1rem;right:1.1rem}}
+@media (max-width:480px){.lg-rows:not(.lg-split) dt{white-space:nowrap}.lg-rows:not(.lg-split) dt::after{min-width:.6rem}.lg-rows:not(.lg-split) dd{font-size:1.2rem}}
 .fine{margin-top:.8rem;color:var(--slate);font-size:.92rem;max-width:var(--measure)}
 
 
@@ -737,13 +738,13 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
       <svg class="lg-mark" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="#16224a" stroke-width="3"/><circle cx="80" cy="80" r="66" fill="none" stroke="#16224a" stroke-width="1.2"/><path d="M98 14 h14 v62 l-7 -7 l-7 7 z" fill="#d99a1e"/><path transform="translate(48.9 111) scale(0.092 -0.092)" d="M0 0 L0 10 L1 10 Q36 10 58.5 30.5 Q81 51 81 84 L81 666 Q79 700 57.5 720 Q36 740 1 740 L0 740 L0 750 L297 750 Q378 750 437.5 729 Q497 708 530 670.5 Q563 633 563 582 Q563 524 513.5 482 Q464 440 384 430 Q458 426 513.5 400.5 Q569 375 600.5 332 Q632 289 632 232 Q632 164 592.5 111.5 Q553 59 481 29.5 Q409 0 311 0 L0 0 Z M235 437 L297 437 Q348 437 379.5 477.5 Q411 518 411 586 Q411 655 379.5 696 Q348 737 297 737 L235 737 L235 437 Z M311 13 Q385 13 428.5 69 Q472 125 472 220 Q472 311 424.5 366.5 Q377 422 297 422 L235 422 L235 84 Q235 13 311 13 Z" fill="#16224a"/></svg>
       <p class="lg-title">The deal, in writing</p>
       <dl class="lg-rows">
-        <div><dt>Upfront cost</dt><dd>$0</dd></div>
-        <div><dt>If it doesn't sell</dt><dd>$0</dd></div>
+        <div><dt>Upfront cost</dt><dd>None</dd></div>
+        <div><dt>If it doesn't sell</dt><dd>Nothing to pay</dd></div>
       </dl>
-      <p class="lg-sub">Of every $10 your book earns, after the store's fees:</p>
+      <p class="lg-sub">Of every sale, after the store's fees:</p>
       <dl class="lg-rows lg-split">
-        <div class="lg-you"><dt>To you</dt><dd>$6</dd></div>
-        <div class="lg-us"><dt>To us<small>This covers the writing, design, store setup, file delivery and buyer emails.</small></dt><dd>$4</dd></div>
+        <div class="lg-you"><dt>To you</dt><dd>60%</dd></div>
+        <div class="lg-us"><dt>To us<small>This covers the writing, design, store setup, file delivery and buyer emails.</small></dt><dd>40%</dd></div>
       </dl>
       <p class="lg-foot">Paid out to you every month. We both sign a short written agreement before anything goes live.</p>
     </div>
