@@ -270,14 +270,12 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem)
 .deal li{padding-left:1.6rem;position:relative}
 .deal li::before{content:"";position:absolute;left:0;top:.55em;width:.6rem;height:.6rem;border-radius:50%;background:var(--blue)}
 .deal > div.you li::before{background:var(--butter);box-shadow:0 0 0 1.5px var(--ink)}
-.shares{display:flex;margin-top:2.4rem;border-radius:14px;overflow:hidden;border:2px solid var(--ink)}
-.shares span{padding:1.4rem 1.6rem 1.2rem;display:flex;flex-direction:column;gap:.1rem}
-.shares b{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,8vw,6.5rem);line-height:.9;letter-spacing:-.02em}
-.shares small{font-size:1rem;font-weight:600}
-.shares span:first-child{flex:60}.shares span:last-child{flex:40}
-.shares span:first-child{background:var(--butter)}
-.shares span:last-child{background:var(--blue);color:#fff;text-align:right;align-items:flex-end}
-.shares span:last-child b{font-size:clamp(2rem,4.5vw,3.4rem);opacity:.85}
+.split6040{margin-top:2.4rem;display:grid;grid-template-columns:auto 1fr;gap:2.5rem;align-items:center}
+.ratio{font-family:var(--display);font-weight:400;font-size:clamp(4.5rem,11vw,8.5rem);line-height:.9;letter-spacing:-.03em;color:var(--ink);white-space:nowrap}
+.ratio i{font-style:normal;color:var(--butter);margin:0 .04em}
+.ratio-txt{display:grid;gap:1rem;max-width:30rem;font-size:1.1rem}
+.ratio-txt b{font-weight:700}
+@media (max-width:640px){.split6040{grid-template-columns:1fr;gap:1.2rem}}
 .fine{margin-top:.8rem;color:var(--slate);font-size:.92rem;max-width:var(--measure)}
 
 
@@ -478,8 +476,6 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 @media (max-width:520px){
   .steps{grid-template-columns:1fr}
   .deal > div{padding:1.6rem 1.4rem}
-  .shares span{padding:1rem .9rem .9rem}
-  .shares small{font-size:.85rem}
 }
 </style>
 </head>
@@ -716,8 +712,8 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <section class="split" id="deal">
   <div class="wrap">
     <h2>It never costs you anything. We only earn when it sells.</h2>
-    <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to the studio"><span><b>60%</b><small>to you, every sale</small></span><span><b>40%</b><small>to us</small></span></div>
-    <p class="fine">Split of net sales after the store platform's fees, paid out monthly. We put it in a short written agreement before anything goes live.</p>
+    <div class="split6040"><p class="ratio" aria-label="60 to you, 40 to us"><span>60</span><i>/</i><span>40</span></p><div class="ratio-txt"><p><b>60% is yours.</b> It is paid out to you every month.</p><p><b>40% covers all our costs.</b> Writing, design, setting up the store, delivering the files and answering buyers all come out of our share, never yours.</p></div></div>
+    <p class="fine">Split of net sales after the store platform's fees. We put it in a short written agreement before anything goes live.</p>
   </div>
 </section>
 
