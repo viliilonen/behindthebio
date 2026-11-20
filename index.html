@@ -167,7 +167,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .ig-in{position:relative;transform-origin:50% 30%;will-change:transform}
 .ig-in{--dim:0}
 .ig-in > :not(.ig-bio),.ig-bio > :not(.ig-shop){opacity:calc(1 - var(--dim) * .75);filter:blur(calc(var(--dim) * 1.5px))}
-.scr-shop,.scr-done,.scr-book{transform:translateY(102%);z-index:2}
+.scr-shop,.scr-done{transform:translateY(102%);z-index:2}
 .sh-url{display:flex;align-items:center;justify-content:center;gap:.35rem;margin:0 .8rem .6rem;padding:.35rem .6rem;border-radius:999px;background:#f0f0f3;font-size:.72rem;color:#444}
 .sh-cover{margin:0 auto;width:52%;aspect-ratio:2/3;border-radius:3px;overflow:hidden;box-shadow:0 14px 26px -12px rgba(22,34,74,.55)}
 .sh-cover img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
@@ -188,23 +188,17 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .dn-mail b{display:block;font-size:.8rem;color:#16224a}.dn-mail small{font-size:.7rem;color:#8a6a1a;font-weight:700}
 .dn-ic{width:2rem;height:2rem;border-radius:8px;background:#16224a;flex:none;position:relative}
 .dn-ic::after{content:"";position:absolute;left:.75rem;top:.45rem;width:.5rem;height:.8rem;background:var(--butter);clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%)}
-.scr-book{background:#2b2d33;display:flex;flex-direction:column}
-.bk-bar{padding:.2rem .8rem .5rem;font-size:.72rem;color:#c9cbd6;text-align:center}
-.bk-pages{position:relative;flex:1;margin:0 .7rem}
-.bk-pages img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;max-width:none;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
-.bk-b{opacity:0}
-.bk-pg{padding:.6rem;font-size:.72rem;color:#c9cbd6;text-align:center}
 .tap{position:absolute;left:0;top:0;width:2.2rem;height:2.2rem;margin:-1.1rem 0 0 -1.1rem;border-radius:50%;background:rgba(22,34,74,.28);border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 6px rgba(22,34,74,.12);z-index:6;opacity:0;pointer-events:none}
 .bio-note{min-height:2.6em;transition:opacity .25s}
 .bio-note.swap{opacity:0}
 @media (min-width:861px){
-  .hero{height:310vh;padding:0}
+  .hero{height:260vh;padding:0}
   .hero-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding-top:3.5rem;overflow:clip}
   .hero-pin > .wrap{width:100%}
   .hero-text{align-self:center}
 }
 @media (max-width:860px){
-  .bio-scroll{justify-self:center;height:250vh;max-width:none}
+  .bio-scroll{justify-self:center;height:210vh;max-width:none}
   .bio-stick{position:sticky;top:4vh}
   .bio-stick{width:min(20.5rem,calc((92vh - 4rem) / 2.25));margin:0 auto}
 }
@@ -560,11 +554,6 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
           <span>Your book is on its way to your inbox.</span>
           <div class="dn-mail"><span class="dn-ic"></span><span><b>The swirl roll book</b><small>Download your PDF</small></span></div>
         </div>
-        <div class="scr scr-book" aria-hidden="true">
-          <div class="bk-bar">The swirl roll book.pdf</div>
-          <div class="bk-pages"><img class="bk-a" src="img/sample-cover.jpg" alt="" width="692" height="1037"><img class="bk-b" src="img/sample-recipe.jpg" alt="" width="692" height="1037"></div>
-          <div class="bk-pg"><span class="bk-n">1</span> / 48</div>
-        </div>
         <span class="tap" aria-hidden="true"></span>
       </div>
       <p class="bio-note" aria-live="polite">The highlighted parts are what we build for you: the ebook and the link to sell it.</p>
@@ -770,17 +759,17 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 (function(){
   var hero=document.querySelector('.hero'), bs=document.querySelector('.bio-scroll'), phone=document.querySelector('.phone'); if(!hero||!bs||!phone) return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), book=phone.querySelector('.scr-book'), bkb=phone.querySelector('.bk-b'), bkn=phone.querySelector('.bk-n'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
+  var igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
   var desk=window.matchMedia('(min-width: 861px)');
   var clamp=function(v){return v<0?0:v>1?1:v}, ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}, seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
-  var NOTES=['The highlighted parts are what we build for you: the ebook and the link to sell it.','Your followers tap the link in your bio.','They land on your own store page, under your name.','They pay in a few taps, and the book arrives by email.','And they read it straight away on their phone.'];
+  var NOTES=['The highlighted parts are what we build for you: the ebook and the link to sell it.','Your followers tap the link in your bio.','They land on your own store page, under your name.','They pay in a few taps, and the book arrives in their inbox.'];
   var last=-1, nt=null, raf=0;
   function rel(el){ var a=el.getBoundingClientRect(), b=phone.getBoundingClientRect(); return {x:a.left-b.left+a.width/2, y:a.top-b.top+a.height/2}; }
   function showTap(pt,t){ if(t<=0||t>=1){ tap.style.opacity='0'; return; } tap.style.left=pt.x+'px'; tap.style.top=pt.y+'px'; var s=t<.5?1.4-.8*(t/.5):.6+.4*((t-.5)/.5); tap.style.opacity=(t<.15?t/.15:t>.8?(1-t)/.2:1).toFixed(2); tap.style.transform='scale('+s.toFixed(2)+')'; }
   function upd(){
     var el=desk.matches?hero:bs, r=el.getBoundingClientRect(), total=el.offsetHeight-innerHeight*(desk.matches?1:.92), p=clamp(-r.top/Math.max(total,1));
     if(!desk.matches){ p=clamp((-r.top+innerHeight*.04)/Math.max(total,1)); }
-    var z=seg(p,.1,.26), t1=clamp((p-.26)/.06), sh=seg(p,.32,.42), t2=clamp((p-.52)/.06), dn=seg(p,.58,.66), bk=seg(p,.74,.82), pg=seg(p,.86,.93);
+    var z=seg(p,.1,.3), t1=clamp((p-.3)/.08), sh=seg(p,.38,.52), t2=clamp((p-.64)/.08), dn=seg(p,.72,.84);
     // zoom into the link card
     var sw=igc.clientWidth, shh=igc.clientHeight, cx=card.offsetLeft+card.offsetWidth/2, cy=card.offsetTop+card.offsetHeight/2;
     var n=card; cx=0; cy=0; while(n&&n!==ig){ cx+=n.offsetLeft; cy+=n.offsetTop; n=n.offsetParent; } cx+=card.offsetWidth/2; cy+=card.offsetHeight/2;
@@ -792,10 +781,8 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     shop.style.transform='translateY('+(102*(1-sh)).toFixed(2)+'%)';
     buy.classList.toggle('press',t2>.3&&t2<.75);
     done.style.transform='translateY('+(102*(1-dn)).toFixed(2)+'%)';
-    book.style.transform='translateY('+(102*(1-bk)).toFixed(2)+'%)';
-    bkb.style.opacity=pg.toFixed(3); if(bkn) bkn.textContent=pg>.5?'10':'1';
     if(t1>0&&t1<1) showTap(rel(cbtn),t1); else if(t2>0&&t2<1) showTap(rel(buy),t2); else showTap(null,0);
-    var st=z<.5?0:(sh<.5?1:(dn<.5?2:(bk<.5?3:4)));
+    var st=z<.5?0:(sh<.5?1:(dn<.5?2:3));
     if(st!==last){ last=st; note.classList.add('swap'); clearTimeout(nt); nt=setTimeout(function(){ note.textContent=NOTES[st]; note.classList.remove('swap'); },200); }
   }
   var req=function(){ if(!raf) raf=requestAnimationFrame(function(){ raf=0; upd(); }); };
