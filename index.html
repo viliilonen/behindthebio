@@ -53,7 +53,7 @@ a{color:inherit}
 .bar nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
 
 /* hero */
-.hero{background:var(--blue);color:#fff;padding:8.5rem 0 6rem;overflow:hidden}
+.hero{background:var(--blue);color:#fff;padding:8.5rem 0 6rem;overflow:clip}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:4rem;align-items:center}
 .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:1;letter-spacing:-.01em;max-width:13ch}
 .hero p.lede{margin-top:1.6rem;font-size:1.25rem;line-height:1.5;max-width:31rem;color:#d4d7e3}
@@ -135,7 +135,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .wall .col:nth-child(3n){animation-duration:95s}
 .wall img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:5px;box-shadow:0 14px 30px -10px rgba(5,10,30,.55);display:block}
 @keyframes wallup{to{transform:translateY(-50%)}}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(98deg,var(--blue) 0%,var(--blue) 34%,rgba(22,34,74,.86) 52%,rgba(22,34,74,.5) 78%,rgba(22,34,74,.3) 100%)}
+.hero-pin{position:relative;isolation:isolate}
+.hero-pin::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(98deg,var(--blue) 0%,var(--blue) 34%,rgba(22,34,74,.86) 52%,rgba(22,34,74,.5) 78%,rgba(22,34,74,.3) 100%)}
 @media (prefers-reduced-motion:reduce){.wall .col{animation:none}}
 
 /* demo shelf */
@@ -157,8 +158,65 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 @media (max-width:520px){.float-cta{right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom));padding:.6rem .95rem;font-size:.88rem;gap:.4rem}.float-cta .long{display:none}.float-cta .short{display:inline}.float-cta svg{width:15px;height:15px}}
 @media (prefers-reduced-motion:reduce){.float-cta{transition:opacity .2s}}
 
+/* buyer journey in the phone */
+.bio-scroll{justify-self:end;width:100%;max-width:min(20.5rem,calc((100vh - 9rem) / 2.25))}
+
+.phone{position:relative}
+.notch{position:relative;z-index:5}
+.scr{position:absolute;left:0;right:0;top:2.6rem;bottom:0;overflow:hidden;background:#fff}
+.ig-in{position:relative;transform-origin:50% 30%;will-change:transform}
+.ig-in{--dim:0}
+.ig-in > :not(.ig-bio),.ig-bio > :not(.ig-shop){opacity:calc(1 - var(--dim) * .75);filter:blur(calc(var(--dim) * 1.5px))}
+.scr-shop,.scr-done,.scr-book{transform:translateY(102%);z-index:2}
+.sh-url{display:flex;align-items:center;justify-content:center;gap:.35rem;margin:0 .8rem .6rem;padding:.35rem .6rem;border-radius:999px;background:#f0f0f3;font-size:.72rem;color:#444}
+.sh-cover{margin:0 auto;width:52%;aspect-ratio:2/3;border-radius:3px;overflow:hidden;box-shadow:0 14px 26px -12px rgba(22,34,74,.55)}
+.sh-cover img{width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+.sh-body{padding:.9rem 1rem 0;display:flex;flex-direction:column;gap:.15rem}
+.sh-body small{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8a6a1a}
+.sh-body b{font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.05;color:#16224a}
+.sh-meta{font-size:.72rem;color:#666}
+.sh-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin-top:.6rem}
+.sh-price{font-family:var(--display);font-size:1.4rem;color:#16224a}
+.sh-buy{flex:1;text-align:center;background:#16224a;color:#fff;font-weight:700;border-radius:8px;padding:.55rem .6rem;font-size:.85rem;transition:transform .15s}
+.sh-buy.press{transform:scale(.94)}
+.sh-body p{margin-top:.6rem;font-size:.75rem;color:#555}
+.scr-done{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;text-align:center;padding:0 1.2rem 3rem}
+.dn-check{width:3.2rem;height:3.2rem;border-radius:50%;display:grid;place-items:center;background:var(--butter);color:#16224a;margin-bottom:.5rem}
+.scr-done > b{font-family:var(--display);font-weight:400;font-size:1.3rem;color:#16224a}
+.scr-done > span{font-size:.78rem;color:#555}
+.dn-mail{margin-top:1.1rem;display:flex;align-items:center;gap:.6rem;text-align:left;width:100%;border:1px solid #e6e6ea;border-radius:12px;padding:.6rem .7rem;box-shadow:0 8px 18px -12px rgba(22,34,74,.4)}
+.dn-mail b{display:block;font-size:.8rem;color:#16224a}.dn-mail small{font-size:.7rem;color:#8a6a1a;font-weight:700}
+.dn-ic{width:2rem;height:2rem;border-radius:8px;background:#16224a;flex:none;position:relative}
+.dn-ic::after{content:"";position:absolute;left:.75rem;top:.45rem;width:.5rem;height:.8rem;background:var(--butter);clip-path:polygon(0 0,100% 0,100% 100%,50% 75%,0 100%)}
+.scr-book{background:#2b2d33;display:flex;flex-direction:column}
+.bk-bar{padding:.2rem .8rem .5rem;font-size:.72rem;color:#c9cbd6;text-align:center}
+.bk-pages{position:relative;flex:1;margin:0 .7rem}
+.bk-pages img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;max-width:none;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+.bk-b{opacity:0}
+.bk-pg{padding:.6rem;font-size:.72rem;color:#c9cbd6;text-align:center}
+.tap{position:absolute;left:0;top:0;width:2.2rem;height:2.2rem;margin:-1.1rem 0 0 -1.1rem;border-radius:50%;background:rgba(22,34,74,.28);border:2px solid rgba(255,255,255,.9);box-shadow:0 0 0 6px rgba(22,34,74,.12);z-index:6;opacity:0;pointer-events:none}
+.bio-note{min-height:2.6em;transition:opacity .25s}
+.bio-note.swap{opacity:0}
+@media (min-width:861px){
+  .hero{height:310vh;padding:0}
+  .hero-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;padding-top:3.5rem;overflow:clip}
+  .hero-pin > .wrap{width:100%}
+  .hero-text{align-self:center}
+}
+@media (max-width:860px){
+  .bio-scroll{justify-self:center;height:250vh;max-width:none}
+  .bio-stick{position:sticky;top:4vh}
+  .bio-stick{width:min(20.5rem,calc((92vh - 4rem) / 2.25));margin:0 auto}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero{height:auto!important;padding:8.5rem 0 6rem!important}
+  .hero-pin{position:static!important;height:auto!important}
+  .bio-scroll{height:auto!important}
+  .bio-stick{position:static!important}
+}
+
 /* the bio */
-.bio{max-width:20.5rem;justify-self:end;width:100%;container-type:inline-size}
+.bio{width:100%;container-type:inline-size}
 .phone{box-sizing:content-box;aspect-ratio:393/852;background:#fff;color:#111;border-radius:2.4rem;border-radius:calc((100cqw - 12px) * 55 / 393 + 6px);padding:0;border:6px solid #11163f;box-shadow:0 34px 70px -30px rgba(10,15,80,.7);overflow:hidden;font-size:.82rem;line-height:1.35}
 .notch{width:5.5rem;height:1.25rem;background:#11163f;border-radius:999px;margin:.65rem auto .7rem}
 .ig-top{display:flex;justify-content:space-between;align-items:center;padding:0 .9rem .6rem}
@@ -171,7 +229,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .ig-stats b{font-size:.98rem;color:#111}
 .ig-bio{display:flex;flex-direction:column;padding:.6rem .9rem 0;gap:.05rem}
 .ig-bio b{font-weight:700}
-.ig-shop{position:relative;margin-top:.6rem;background:var(--butter);border-radius:.7rem;padding:.4rem .5rem .4rem .65rem;box-shadow:0 12px 24px -12px rgba(120,80,0,.6),0 0 0 3px rgba(217,154,30,.3)}
+.ig-shop{position:relative;margin-top:.6rem;background:var(--butter);border-radius:.7rem;padding:.4rem .5rem .4rem .65rem;box-shadow:0 12px 24px -12px rgba(120,80,0,.6),0 0 0 calc(3px + var(--dim,0) * 4px) rgba(217,154,30,.3)}
 .ig-row{display:flex;align-items:center;gap:.5rem}
 .ig-shop-txt{flex:1;display:flex;flex-direction:column;line-height:1.2;min-width:0}
 .ig-shop-txt small{font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#3a2705}
@@ -193,10 +251,6 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .ig-grid img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block;max-width:none}
 .bio-note{margin-top:1rem;font-size:.82rem;color:#c3c8da;text-align:center}
 @media (prefers-reduced-motion:no-preference){
-  .ig-shop{animation:land .7s cubic-bezier(.2,1.4,.3,1) .7s both}
-  .hl.new{animation:land .7s cubic-bezier(.2,1.4,.3,1) 1s both}
-  .ig-grid img{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
-  .ig-grid img:nth-child(n+4){animation-delay:.15s}
   @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   @keyframes land{from{opacity:0;transform:translateY(-40px) scale(.96)}to{opacity:1;transform:none}}
 }
@@ -411,7 +465,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 @media (max-width:860px){
   .hero{padding:7rem 0 4.5rem}
   .wall{left:-20%;right:-20%;top:-10%;opacity:.55}
-  .hero::before{background:linear-gradient(180deg,rgba(22,34,74,.9) 0%,rgba(22,34,74,.84) 55%,rgba(22,34,74,.7) 100%)}
+  .hero-pin::before{background:linear-gradient(180deg,rgba(22,34,74,.9) 0%,rgba(22,34,74,.84) 55%,rgba(22,34,74,.7) 100%)}
   .hero .wrap,.example .wrap,.fit .wrap{grid-template-columns:1fr;gap:3rem}
   .bio{justify-self:start}
   .steps{grid-template-columns:1fr 1fr}
@@ -444,9 +498,10 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 
 <main id="top">
 <section class="hero">
+<div class="hero-pin">
   <div class="wall" aria-hidden="true"><div class="col"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-crochet.jpg" alt="" width="330" height="495"><img src="img/demos/t-dog.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-crochet.jpg" alt="" width="330" height="495"><img src="img/demos/t-dog.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-kids.jpg" alt="" width="330" height="495"><img src="img/demos/t-prep.jpg" alt="" width="330" height="495"><img src="img/demos/t-clean.jpg" alt="" width="330" height="495"><img src="img/demos/t-travel.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-kids.jpg" alt="" width="330" height="495"><img src="img/demos/t-prep.jpg" alt="" width="330" height="495"><img src="img/demos/t-clean.jpg" alt="" width="330" height="495"><img src="img/demos/t-travel.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-dog.jpg" alt="" width="330" height="495"><img src="img/demos/t-sourdough.jpg" alt="" width="330" height="495"><img src="img/demos/t-garden.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-dog.jpg" alt="" width="330" height="495"><img src="img/demos/t-sourdough.jpg" alt="" width="330" height="495"><img src="img/demos/t-garden.jpg" alt="" width="330" height="495"><img src="img/demos/t-world.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-travel.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-crochet.jpg" alt="" width="330" height="495"><img src="img/demos/t-travel.jpg" alt="" width="330" height="495"><img src="img/demos/t-bowl.jpg" alt="" width="330" height="495"><img src="img/demos/t-swirl.jpg" alt="" width="330" height="495"><img src="img/demos/t-bread.jpg" alt="" width="330" height="495"><img src="img/demos/t-crochet.jpg" alt="" width="330" height="495"></div><div class="col"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-kids.jpg" alt="" width="330" height="495"><img src="img/demos/t-prep.jpg" alt="" width="330" height="495"><img src="img/demos/t-clean.jpg" alt="" width="330" height="495"><img src="img/demos/t-brownie.jpg" alt="" width="330" height="495"><img src="img/demos/t-truffle.jpg" alt="" width="330" height="495"><img src="img/demos/t-kids.jpg" alt="" width="330" height="495"><img src="img/demos/t-prep.jpg" alt="" width="330" height="495"><img src="img/demos/t-clean.jpg" alt="" width="330" height="495"></div></div>
   <div class="wrap">
-    <div>
+    <div class="hero-text">
       <h1>Your followers keep asking. Sell them the answer.</h1>
       <p class="lede">We turn your best content into a guide or ebook your followers can buy from your link in bio. You post about it, we do everything else, and you keep 60% of every sale.</p>
       <div class="cta-row">
@@ -456,9 +511,11 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
       <p class="free-note">It never costs you anything. We only earn when your followers buy.</p>
     </div>
 
+    <div class="bio-scroll"><div class="bio-stick">
     <div class="bio" aria-label="Example of a creator's profile with the ebook link added to the bio">
       <div class="phone">
         <div class="notch" aria-hidden="true"></div>
+        <div class="scr scr-ig"><div class="ig-in">
         <div class="ig-top"><span class="ig-name">kettleandcrumb <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
           <span class="ig-icons" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2.5" y="2.5" width="15" height="15" rx="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10 6.5v7M6.5 10h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><svg width="20" height="20" viewBox="0 0 20 20"><path d="M3 5.5h14M3 10h14M3 14.5h14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span></div>
         <div class="ig-head">
@@ -485,10 +542,36 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
           <img src="img/feed/f1.jpg" alt="" width="240" height="320"><img src="img/feed/f2.jpg" alt="" width="240" height="320"><img src="img/feed/f3.jpg" alt="" width="240" height="320">
           <img src="img/feed/f4.jpg" alt="" width="240" height="320"><img src="img/feed/f5.jpg" alt="" width="240" height="320"><img src="img/feed/f6.jpg" alt="" width="240" height="320">
         </div>
+        </div></div>
+        <div class="scr scr-shop" aria-hidden="true">
+          <div class="sh-url"><svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><rect x="1" y="5" width="8" height="6.5" rx="1.5" fill="currentColor"/><path d="M3 5V3.6a2 2 0 014 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>kettleandcrumb.com/book</div>
+          <div class="sh-cover"><img src="img/sample-cover.jpg" alt="" width="692" height="1037"></div>
+          <div class="sh-body">
+            <small>kettle &amp; crumb</small>
+            <b>The swirl roll book</b>
+            <span class="sh-meta">PDF · 48 pages · 12 recipes</span>
+            <div class="sh-row"><span class="sh-price">$14</span><span class="sh-buy">Buy now</span></div>
+            <p>One soft dough, twelve swirls and a planner for bake day.</p>
+          </div>
+        </div>
+        <div class="scr scr-done" aria-hidden="true">
+          <span class="dn-check"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <b>Thanks for your order</b>
+          <span>Your book is on its way to your inbox.</span>
+          <div class="dn-mail"><span class="dn-ic"></span><span><b>The swirl roll book</b><small>Download your PDF</small></span></div>
+        </div>
+        <div class="scr scr-book" aria-hidden="true">
+          <div class="bk-bar">The swirl roll book.pdf</div>
+          <div class="bk-pages"><img class="bk-a" src="img/sample-cover.jpg" alt="" width="692" height="1037"><img class="bk-b" src="img/sample-recipe.jpg" alt="" width="692" height="1037"></div>
+          <div class="bk-pg"><span class="bk-n">1</span> / 48</div>
+        </div>
+        <span class="tap" aria-hidden="true"></span>
       </div>
-      <p class="bio-note">The highlighted parts are what we build for you: the ebook and the link to sell it.</p>
+      <p class="bio-note" aria-live="polite">The highlighted parts are what we build for you: the ebook and the link to sell it.</p>
     </div>
+    </div></div>
   </div>
+</div>
 </section>
 
 <section id="how">
@@ -684,6 +767,40 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <footer><div class="wrap"><span>&copy; 2026 Behind the Bio</span><span class="ft-links"><a href="mailto:hello@getbehindthebio.com">hello@getbehindthebio.com</a><span>Helsinki, Finland</span></span></div></footer>
 
 <script>
+(function(){
+  var hero=document.querySelector('.hero'), bs=document.querySelector('.bio-scroll'), phone=document.querySelector('.phone'); if(!hero||!bs||!phone) return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), book=phone.querySelector('.scr-book'), bkb=phone.querySelector('.bk-b'), bkn=phone.querySelector('.bk-n'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
+  var desk=window.matchMedia('(min-width: 861px)');
+  var clamp=function(v){return v<0?0:v>1?1:v}, ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}, seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
+  var NOTES=['The highlighted parts are what we build for you: the ebook and the link to sell it.','Your followers tap the link in your bio.','They land on your own store page, under your name.','They pay in a few taps, and the book arrives by email.','And they read it straight away on their phone.'];
+  var last=-1, nt=null, raf=0;
+  function rel(el){ var a=el.getBoundingClientRect(), b=phone.getBoundingClientRect(); return {x:a.left-b.left+a.width/2, y:a.top-b.top+a.height/2}; }
+  function showTap(pt,t){ if(t<=0||t>=1){ tap.style.opacity='0'; return; } tap.style.left=pt.x+'px'; tap.style.top=pt.y+'px'; var s=t<.5?1.4-.8*(t/.5):.6+.4*((t-.5)/.5); tap.style.opacity=(t<.15?t/.15:t>.8?(1-t)/.2:1).toFixed(2); tap.style.transform='scale('+s.toFixed(2)+')'; }
+  function upd(){
+    var el=desk.matches?hero:bs, r=el.getBoundingClientRect(), total=el.offsetHeight-innerHeight*(desk.matches?1:.92), p=clamp(-r.top/Math.max(total,1));
+    if(!desk.matches){ p=clamp((-r.top+innerHeight*.04)/Math.max(total,1)); }
+    var z=seg(p,.1,.26), t1=clamp((p-.26)/.06), sh=seg(p,.32,.42), t2=clamp((p-.52)/.06), dn=seg(p,.58,.66), bk=seg(p,.74,.82), pg=seg(p,.86,.93);
+    // zoom into the link card
+    var sw=igc.clientWidth, shh=igc.clientHeight, cx=card.offsetLeft+card.offsetWidth/2, cy=card.offsetTop+card.offsetHeight/2;
+    var n=card; cx=0; cy=0; while(n&&n!==ig){ cx+=n.offsetLeft; cy+=n.offsetTop; n=n.offsetParent; } cx+=card.offsetWidth/2; cy+=card.offsetHeight/2;
+    var kmax=Math.min(1.6, sw*.96/card.offsetWidth), k=1+(kmax-1)*z;
+    ig.style.setProperty('--dim',z.toFixed(3));
+    ig.style.transformOrigin=cx+'px '+cy+'px';
+    ig.style.transform='translate('+((sw/2-cx)*z).toFixed(1)+'px,'+((shh*.45-cy)*z).toFixed(1)+'px) scale('+k.toFixed(3)+')';
+    cbtn.style.transform=(t1>.3&&t1<.75)?'scale(.9)':'';
+    shop.style.transform='translateY('+(102*(1-sh)).toFixed(2)+'%)';
+    buy.classList.toggle('press',t2>.3&&t2<.75);
+    done.style.transform='translateY('+(102*(1-dn)).toFixed(2)+'%)';
+    book.style.transform='translateY('+(102*(1-bk)).toFixed(2)+'%)';
+    bkb.style.opacity=pg.toFixed(3); if(bkn) bkn.textContent=pg>.5?'10':'1';
+    if(t1>0&&t1<1) showTap(rel(cbtn),t1); else if(t2>0&&t2<1) showTap(rel(buy),t2); else showTap(null,0);
+    var st=z<.5?0:(sh<.5?1:(dn<.5?2:(bk<.5?3:4)));
+    if(st!==last){ last=st; note.classList.add('swap'); clearTimeout(nt); nt=setTimeout(function(){ note.textContent=NOTES[st]; note.classList.remove('swap'); },200); }
+  }
+  var req=function(){ if(!raf) raf=requestAnimationFrame(function(){ raf=0; upd(); }); };
+  addEventListener('scroll',req,{passive:true}); addEventListener('resize',req); upd();
+})();
 (function(){
   var sc=document.querySelector('.ex-scroll'), bk=document.querySelector('.book3d'), cap=document.querySelector('.ex-cap'); if(!sc||!bk) return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){ if(cap) cap.textContent='Contents and a recipe page'; return; }
