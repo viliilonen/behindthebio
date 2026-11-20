@@ -202,6 +202,11 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   .bio-stick{position:static!important}
 }
 
+.bio-stick{position:relative}
+.stamp60{position:absolute;z-index:8;left:-4.4rem;bottom:22%;width:8.8rem;height:8.8rem;transform:rotate(-10deg);transition:opacity .3s;filter:drop-shadow(0 10px 18px rgba(5,10,30,.45))}
+.stamp60 svg{width:100%;height:100%;display:block}
+.stamp60 b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:400;font-size:2.7rem;color:#16224a;letter-spacing:-.02em}
+@media (max-width:860px){.stamp60{left:-1.2rem;bottom:20%;width:7rem;height:7rem}.stamp60 b{font-size:2.1rem}}
 /* the bio */
 .bio{width:100%;container-type:inline-size}
 .phone{box-sizing:content-box;aspect-ratio:393/852;background:#fff;color:#111;border-radius:2.4rem;border-radius:calc((100cqw - 12px) * 55 / 393 + 6px);padding:0;border:6px solid #11163f;box-shadow:0 34px 70px -30px rgba(10,15,80,.7);overflow:hidden;font-size:.82rem;line-height:1.35}
@@ -267,11 +272,14 @@ h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem)
 .deal li{padding-left:1.6rem;position:relative}
 .deal li::before{content:"";position:absolute;left:0;top:.55em;width:.6rem;height:.6rem;border-radius:50%;background:var(--blue)}
 .deal > div.you li::before{background:var(--butter);box-shadow:0 0 0 1.5px var(--ink)}
-.shares{display:flex;margin-top:2rem;border-radius:999px;overflow:hidden;font-weight:700;border:2px solid var(--ink)}
-.shares span{padding:.9rem 1.2rem}
+.shares{display:flex;margin-top:2.4rem;border-radius:14px;overflow:hidden;border:2px solid var(--ink)}
+.shares span{padding:1.4rem 1.6rem 1.2rem;display:flex;flex-direction:column;gap:.1rem}
+.shares b{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,8vw,6.5rem);line-height:.9;letter-spacing:-.02em}
+.shares small{font-size:1rem;font-weight:600}
 .shares span:first-child{flex:60}.shares span:last-child{flex:40}
 .shares span:first-child{background:var(--butter)}
-.shares span:last-child{background:var(--blue);color:#fff;text-align:right}
+.shares span:last-child{background:var(--blue);color:#fff;text-align:right;align-items:flex-end}
+.shares span:last-child b{font-size:clamp(2rem,4.5vw,3.4rem);opacity:.85}
 .fine{margin-top:.8rem;color:var(--slate);font-size:.92rem;max-width:var(--measure)}
 
 
@@ -472,7 +480,8 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 @media (max-width:520px){
   .steps{grid-template-columns:1fr}
   .deal > div{padding:1.6rem 1.4rem}
-  .shares span{padding:.8rem .9rem;font-size:.92rem}
+  .shares span{padding:1rem .9rem .9rem}
+  .shares small{font-size:.85rem}
 }
 </style>
 </head>
@@ -507,6 +516,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     </div>
 
     <div class="bio-scroll"><div class="bio-stick">
+    <div class="stamp60" aria-label="You keep 60 percent of every sale"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="st60" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><circle cx="60" cy="60" r="57" fill="#d99a1e"/><circle cx="60" cy="60" r="51" fill="none" stroke="#16224a" stroke-width="1.4"/><text font-family="Instrument Sans, sans-serif" font-size="9" font-weight="700" letter-spacing="2.2" fill="#16224a"><textPath href="#st60" startOffset="0">OF EVERY SALE IS YOURS · OF EVERY SALE IS YOURS ·</textPath></text></svg><b>60%</b></div>
     <div class="bio" aria-label="Example of a creator's profile with the ebook link added to the bio">
       <div class="phone">
         <div class="notch" aria-hidden="true"></div>
@@ -706,7 +716,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 <section class="split" id="deal">
   <div class="wrap">
     <h2>It never costs you anything. We only earn when it sells.</h2>
-    <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to the studio"><span>60% to you</span><span>40% to us</span></div>
+    <div class="shares" aria-label="Revenue split: 60 percent to you, 40 percent to the studio"><span><b>60%</b><small>to you, every sale</small></span><span><b>40%</b><small>to us</small></span></div>
     <p class="fine">Split of net sales after the store platform's fees, paid out monthly. We put it in a short written agreement before anything goes live.</p>
   </div>
 </section>
@@ -751,7 +761,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
 (function(){
   var hero=document.querySelector('.hero'), bs=document.querySelector('.bio-scroll'), phone=document.querySelector('.phone'); if(!hero||!bs||!phone) return;
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
+  var stamp=document.querySelector('.stamp60'), igc=phone.querySelector('.scr-ig'), ig=phone.querySelector('.ig-in'), card=phone.querySelector('.ig-shop'), cbtn=phone.querySelector('.ig-shop-btn'), shop=phone.querySelector('.scr-shop'), buy=phone.querySelector('.sh-buy'), done=phone.querySelector('.scr-done'), tap=phone.querySelector('.tap'), note=document.querySelector('.bio-note');
   var desk=window.matchMedia('(min-width: 861px)');
   var clamp=function(v){return v<0?0:v>1?1:v}, ease=function(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}, seg=function(p,a,b){return ease(clamp((p-a)/(b-a)))};
   var NOTES=['The highlighted parts are what we build for you: the ebook and the link to sell it.','Your followers tap the link in your bio.','They land on your own store page, under your name.','They pay in a few taps, and the book arrives in their inbox.'];
@@ -766,7 +776,7 @@ footer a{color:#fff;text-decoration:none}footer a:hover{text-decoration:underlin
     var sw=igc.clientWidth, shh=igc.clientHeight, cx=card.offsetLeft+card.offsetWidth/2, cy=card.offsetTop+card.offsetHeight/2;
     var n=card; cx=0; cy=0; while(n&&n!==ig){ cx+=n.offsetLeft; cy+=n.offsetTop; n=n.offsetParent; } cx+=card.offsetWidth/2; cy+=card.offsetHeight/2;
     var kmax=Math.min(1.6, sw*.96/card.offsetWidth), k=1+(kmax-1)*z;
-    ig.style.setProperty('--dim',z.toFixed(3));
+    ig.style.setProperty('--dim',z.toFixed(3)); if(stamp) stamp.style.opacity=(1-clamp(z*2.5)).toFixed(3);
     ig.style.transformOrigin=cx+'px '+cy+'px';
     ig.style.transform='translate('+((sw/2-cx)*z).toFixed(1)+'px,'+((shh*.45-cy)*z).toFixed(1)+'px) scale('+k.toFixed(3)+')';
     cbtn.style.transform=(t1>.3&&t1<.75)?'scale(.9)':'';
